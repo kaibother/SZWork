@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pluto.dao.ServiceGradeMapper" >
+  <resultMap id="BaseResultMap" type="pluto.entity.ServiceGrade" >
+    <id column="servicegradeid" property="servicegradeid" jdbcType="INTEGER" />
+    <result column="serviceprice" property="serviceprice" jdbcType="DOUBLE" />
+    <result column="dogweight" property="dogweight" jdbcType="DOUBLE" />
+    <result column="vipprice" property="vipprice" jdbcType="DOUBLE" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    servicegradeid, serviceprice, dogweight, vipprice
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_servicegrade
+    where servicegradeid = #{servicegradeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_servicegrade
+    where servicegradeid = #{servicegradeid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pluto.entity.ServiceGrade" >
+    insert into tbl_servicegrade (servicegradeid, serviceprice, dogweight, 
+      vipprice)
+    values (#{servicegradeid,jdbcType=INTEGER}, #{serviceprice,jdbcType=DOUBLE}, #{dogweight,jdbcType=DOUBLE}, 
+      #{vipprice,jdbcType=DOUBLE})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pluto.entity.ServiceGrade" >
+    update tbl_servicegrade
+    set serviceprice = #{serviceprice,jdbcType=DOUBLE},
+      dogweight = #{dogweight,jdbcType=DOUBLE},
+      vipprice = #{vipprice,jdbcType=DOUBLE}
+    where servicegradeid = #{servicegradeid,jdbcType=INTEGER}
+  </update>
+</mapper>

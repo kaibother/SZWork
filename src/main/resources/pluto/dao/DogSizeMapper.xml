@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pluto.dao.DogSizeMapper" >
+  <resultMap id="BaseResultMap" type="pluto.entity.DogSize" >
+    <id column="dogsizeid" property="dogsizeid" jdbcType="INTEGER" />
+    <result column="size" property="size" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    dogsizeid, size
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_dogsize
+    where dogsizeid = #{dogsizeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_dogsize
+    where dogsizeid = #{dogsizeid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pluto.entity.DogSize" >
+    insert into tbl_dogsize (dogsizeid, size)
+    values (#{dogsizeid,jdbcType=INTEGER}, #{size,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pluto.entity.DogSize" >
+    update tbl_dogsize
+    set size = #{size,jdbcType=VARCHAR}
+    where dogsizeid = #{dogsizeid,jdbcType=INTEGER}
+  </update>
+</mapper>

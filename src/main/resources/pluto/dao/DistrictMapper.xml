@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pluto.dao.DistrictMapper" >
+  <resultMap id="BaseResultMap" type="pluto.entity.District" >
+    <id column="districtid" property="districtid" jdbcType="INTEGER" />
+    <result column="districtname" property="districtname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    districtid, districtname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_district
+    where districtid = #{districtid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_district
+    where districtid = #{districtid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pluto.entity.District" >
+    insert into tbl_district (districtid, districtname)
+    values (#{districtid,jdbcType=INTEGER}, #{districtname,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pluto.entity.District" >
+    update tbl_district
+    set districtname = #{districtname,jdbcType=VARCHAR}
+    where districtid = #{districtid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pluto.dao.FosterDetailMapper" >
+  <resultMap id="BaseResultMap" type="pluto.entity.FosterDetail" >
+    <id column="fosterdetailid" property="fosterdetailid" jdbcType="INTEGER" />
+    <result column="fosterday" property="fosterday" jdbcType="INTEGER" />
+    <result column="fostertotalprice" property="fostertotalprice" jdbcType="DOUBLE" />
+    <result column="doghousegradeid" property="doghousegradeid" jdbcType="INTEGER" />
+    <result column="petid" property="petid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    fosterdetailid, fosterday, fostertotalprice, doghousegradeid, petid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_fosterdetail
+    where fosterdetailid = #{fosterdetailid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_fosterdetail
+    where fosterdetailid = #{fosterdetailid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pluto.entity.FosterDetail" >
+    insert into tbl_fosterdetail (fosterdetailid, fosterday, fostertotalprice, 
+      doghousegradeid, petid)
+    values (#{fosterdetailid,jdbcType=INTEGER}, #{fosterday,jdbcType=INTEGER}, #{fostertotalprice,jdbcType=DOUBLE}, 
+      #{doghousegradeid,jdbcType=INTEGER}, #{petid,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pluto.entity.FosterDetail" >
+    update tbl_fosterdetail
+    set fosterday = #{fosterday,jdbcType=INTEGER},
+      fostertotalprice = #{fostertotalprice,jdbcType=DOUBLE},
+      doghousegradeid = #{doghousegradeid,jdbcType=INTEGER},
+      petid = #{petid,jdbcType=INTEGER}
+    where fosterdetailid = #{fosterdetailid,jdbcType=INTEGER}
+  </update>
+</mapper>

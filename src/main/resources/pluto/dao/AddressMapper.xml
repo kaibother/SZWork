@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pluto.dao.AddressMapper" >
+  <resultMap id="BaseResultMap" type="pluto.entity.Address" >
+    <id column="addressid" property="addressid" jdbcType="INTEGER" />
+    <result column="countryid" property="countryid" jdbcType="INTEGER" />
+    <result column="provinceid" property="provinceid" jdbcType="INTEGER" />
+    <result column="cityid" property="cityid" jdbcType="INTEGER" />
+    <result column="districtid" property="districtid" jdbcType="INTEGER" />
+    <result column="streetid" property="streetid" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    addressid, countryid, provinceid, cityid, districtid, streetid, userid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_address
+    where addressid = #{addressid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_address
+    where addressid = #{addressid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pluto.entity.Address" >
+    insert into tbl_address (addressid, countryid, provinceid, 
+      cityid, districtid, streetid, 
+      userid)
+    values (#{addressid,jdbcType=INTEGER}, #{countryid,jdbcType=INTEGER}, #{provinceid,jdbcType=INTEGER}, 
+      #{cityid,jdbcType=INTEGER}, #{districtid,jdbcType=INTEGER}, #{streetid,jdbcType=INTEGER}, 
+      #{userid,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pluto.entity.Address" >
+    update tbl_address
+    set countryid = #{countryid,jdbcType=INTEGER},
+      provinceid = #{provinceid,jdbcType=INTEGER},
+      cityid = #{cityid,jdbcType=INTEGER},
+      districtid = #{districtid,jdbcType=INTEGER},
+      streetid = #{streetid,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=INTEGER}
+    where addressid = #{addressid,jdbcType=INTEGER}
+  </update>
+</mapper>

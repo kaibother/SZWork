@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pluto.dao.ActiveSignUpMapper" >
+  <resultMap id="BaseResultMap" type="pluto.entity.ActiveSignUp" >
+    <id column="signupid" property="signupid" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="activedate" property="activedate" jdbcType="DATE" />
+    <result column="activetypeid" property="activetypeid" jdbcType="INTEGER" />
+    <result column="activegradeid" property="activegradeid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    signupid, userid, activedate, activetypeid, activegradeid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_activesignup
+    where signupid = #{signupid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_activesignup
+    where signupid = #{signupid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pluto.entity.ActiveSignUp" >
+    insert into tbl_activesignup (signupid, userid, activedate, 
+      activetypeid, activegradeid)
+    values (#{signupid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, #{activedate,jdbcType=DATE}, 
+      #{activetypeid,jdbcType=INTEGER}, #{activegradeid,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pluto.entity.ActiveSignUp" >
+    update tbl_activesignup
+    set userid = #{userid,jdbcType=INTEGER},
+      activedate = #{activedate,jdbcType=DATE},
+      activetypeid = #{activetypeid,jdbcType=INTEGER},
+      activegradeid = #{activegradeid,jdbcType=INTEGER}
+    where signupid = #{signupid,jdbcType=INTEGER}
+  </update>
+</mapper>

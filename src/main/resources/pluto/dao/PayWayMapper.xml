@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pluto.dao.PayWayMapper" >
+  <resultMap id="BaseResultMap" type="pluto.entity.PayWay" >
+    <id column="paywayid" property="paywayid" jdbcType="INTEGER" />
+    <result column="Paywayname" property="paywayname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    paywayid, Paywayname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_payway
+    where paywayid = #{paywayid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_payway
+    where paywayid = #{paywayid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pluto.entity.PayWay" >
+    insert into tbl_payway (paywayid, Paywayname)
+    values (#{paywayid,jdbcType=INTEGER}, #{paywayname,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pluto.entity.PayWay" >
+    update tbl_payway
+    set Paywayname = #{paywayname,jdbcType=VARCHAR}
+    where paywayid = #{paywayid,jdbcType=INTEGER}
+  </update>
+</mapper>

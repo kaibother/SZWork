@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pluto.dao.DogDiseaseMapper" >
+<resultMap id="BaseResultMap" type="pluto.entity.DogDisease" >
+  <id column="dogdiseaseid" property="dogdiseaseid" jdbcType="INTEGER" />
+  <result column="petid" property="petid" jdbcType="INTEGER" />
+  <result column="dogcommondiseaseid" property="dogcommondiseaseid" jdbcType="INTEGER" />
+</resultMap>
+<sql id="Base_Column_List" >
+  dogdiseaseid, petid, dogcommondiseaseid
+</sql>
+<select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  select
+  <include refid="Base_Column_List" />
+  from tbl_dogdisease
+  where dogdiseaseid = #{dogdiseaseid,jdbcType=INTEGER}
+</select>
+<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+  delete from tbl_dogdisease
+  where dogdiseaseid = #{dogdiseaseid,jdbcType=INTEGER}
+</delete>
+<insert id="insert" parameterType="pluto.entity.DogDisease" >
+  insert into tbl_dogdisease (dogdiseaseid, petid, dogcommondiseaseid
+  )
+  values (#{dogdiseaseid,jdbcType=INTEGER}, #{petid,jdbcType=INTEGER}, #{dogcommondiseaseid,jdbcType=INTEGER}
+  )
+</insert>
+<update id="updateByPrimaryKey" parameterType="pluto.entity.DogDisease" >
+  update tbl_dogdisease
+  set petid = #{petid,jdbcType=INTEGER},
+  dogcommondiseaseid = #{dogcommondiseaseid,jdbcType=INTEGER}
+  where dogdiseaseid = #{dogdiseaseid,jdbcType=INTEGER}
+</update>
+</mapper>

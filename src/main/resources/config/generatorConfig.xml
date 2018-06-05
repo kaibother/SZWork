@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <context id="testTables" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--mysql数据库连接的信息：驱动类、连接地址、用户名、密码 -->
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://localhost:3306/pluto" userId="root"
+                        password="1234">
+        </jdbcConnection>
+
+        <!--oracle配置-->
+        <!-- <jdbcConnection driverClass="oracle.jdbc.OracleDriver" connectionURL="jdbc:oracle:thin:@127.0.0.1:1521:yycg"
+            userId="yycg"
+            password="yycg">
+        </jdbcConnection> -->
+
+        <!-- 默认false，把JDBC DECIMAL 和 NUMERIC 类型解析为 Integer，
+        为 true时把JDBC DECIMAL和NUMERIC类型解析为java.math.BigDecimal -->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!-- targetProject:生成model类的位置，重要！！ -->
+        <javaModelGenerator targetPackage="pluto.entity" targetProject=".\src\main\java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false"/>
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <!-- targetProject:mapper映射xml文件生成的位置，重要！！ -->
+        <sqlMapGenerator targetPackage="resources.pluto.dao"
+                         targetProject=".\src\main">
+            <property name="enableSubPackages" value="false"/>
+        </sqlMapGenerator>
+
+        <!-- targetPackage：mapper接口生成的位置，重要！！ -->
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="pluto.dao"
+                             targetProject=".\src\main\java">
+            <property name="enableSubPackages" value="false"/>
+        </javaClientGenerator>
+
+        <!-- 指定数据库表，要生成哪些表，就写哪些表，要和数据库中对应，不能写错！ -->
+        <table tableName="tbl_activegrade" domainObjectName="ActiveGrade"></table>
+        <table tableName="tbl_activesignup" domainObjectName="ActiveSignUp"></table>
+        <table tableName="tbl_activetype" domainObjectName="ActiveType"></table>
+        <table tableName="tbl_address" domainObjectName="Address"></table>
+        <table tableName="tbl_brand" domainObjectName="Brand"></table>
+        <table tableName="tbl_cart" domainObjectName="Cart"></table>
+        <table tableName="tbl_city" domainObjectName="City"></table>
+        <table tableName="tbl_country" domainObjectName="Country"></table>
+        <table tableName="tbl_district" domainObjectName="District"></table>
+        <table tableName="tbl_dog" domainObjectName="Dog"></table>
+        <table tableName="tbl_dogage" domainObjectName="DogAge"></table>
+        <table tableName="tbl_dogcommondisease" domainObjectName="DogCommonDisease"></table>
+        <table tableName="tbl_dogdisease" domainObjectName="DogDisease"></table>
+        <table tableName="tbl_dogdiseasedeal" domainObjectName="DogDiseaseDeal"></table>
+        <table tableName="tbl_doghouse" domainObjectName="DogHouse"></table>
+        <table tableName="tbl_doghousegrade" domainObjectName="DogHouseGrade"></table>
+        <table tableName="tbl_dogiq" domainObjectName="DogIQ"></table>
+        <table tableName="tbl_dogsize" domainObjectName="DogSize"></table>
+        <table tableName="tbl_dogtype" domainObjectName="DogType"></table>
+        <table tableName="tbl_dogweight" domainObjectName="DogWeight"></table>
+        <table tableName="tbl_fosterdetail" domainObjectName="FosterDetail"></table>
+        <table tableName="tbl_goods" domainObjectName="Goods"></table>
+        <table tableName="tbl_goodscategory" domainObjectName="GoodsCategory"></table>
+        <table tableName="tbl_userconsumption" domainObjectName="UserConsumption"></table>
+        <table tableName="tbl_user" domainObjectName="User"></table>
+        <table tableName="tbl_town" domainObjectName="Town"></table>
+        <table tableName="tbl_street" domainObjectName="Street"></table>
+        <table tableName="tbl_servicetype" domainObjectName="ServiceType"></table>
+        <table tableName="tbl_servicegrade" domainObjectName="ServiceGrade"></table>
+        <table tableName="tbl_servicedetail" domainObjectName="ServiceDetail"></table>
+        <table tableName="tbl_province" domainObjectName="Province"></table>
+        <table tableName="tbl_pet" domainObjectName="Pet"></table>
+        <table tableName="tbl_payway" domainObjectName="PayWay"></table>
+        <table tableName="tbl_order" domainObjectName="Order"></table>
+        <table tableName="tbl_hospitalinfo" domainObjectName="HospitalInfo"></table>
+        <table tableName="tbl_goodsdetail" domainObjectName="GoodsDetail"></table>
+
+    </context>
+</generatorConfiguration>

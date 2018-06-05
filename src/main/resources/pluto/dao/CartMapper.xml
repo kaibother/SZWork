@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pluto.dao.CartMapper" >
+  <resultMap id="BaseResultMap" type="pluto.entity.Cart" >
+    <id column="cartid" property="cartid" jdbcType="INTEGER" />
+    <result column="carttotalprice" property="carttotalprice" jdbcType="DOUBLE" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="goodsdetailid" property="goodsdetailid" jdbcType="INTEGER" />
+    <result column="servicedetailid" property="servicedetailid" jdbcType="INTEGER" />
+    <result column="fosterdetailid" property="fosterdetailid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    cartid, carttotalprice, userid, goodsdetailid, servicedetailid, fosterdetailid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_cart
+    where cartid = #{cartid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_cart
+    where cartid = #{cartid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pluto.entity.Cart" >
+    insert into tbl_cart (cartid, carttotalprice, userid, 
+      goodsdetailid, servicedetailid, fosterdetailid
+      )
+    values (#{cartid,jdbcType=INTEGER}, #{carttotalprice,jdbcType=DOUBLE}, #{userid,jdbcType=INTEGER}, 
+      #{goodsdetailid,jdbcType=INTEGER}, #{servicedetailid,jdbcType=INTEGER}, #{fosterdetailid,jdbcType=INTEGER}
+      )
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pluto.entity.Cart" >
+    update tbl_cart
+    set carttotalprice = #{carttotalprice,jdbcType=DOUBLE},
+      userid = #{userid,jdbcType=INTEGER},
+      goodsdetailid = #{goodsdetailid,jdbcType=INTEGER},
+      servicedetailid = #{servicedetailid,jdbcType=INTEGER},
+      fosterdetailid = #{fosterdetailid,jdbcType=INTEGER}
+    where cartid = #{cartid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pluto.dao.BrandMapper" >
+  <resultMap id="BaseResultMap" type="pluto.entity.Brand" >
+    <id column="brandid" property="brandid" jdbcType="INTEGER" />
+    <result column="brandname" property="brandname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    brandid, brandname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_brand
+    where brandid = #{brandid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_brand
+    where brandid = #{brandid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pluto.entity.Brand" >
+    insert into tbl_brand (brandid, brandname)
+    values (#{brandid,jdbcType=INTEGER}, #{brandname,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pluto.entity.Brand" >
+    update tbl_brand
+    set brandname = #{brandname,jdbcType=VARCHAR}
+    where brandid = #{brandid,jdbcType=INTEGER}
+  </update>
+</mapper>

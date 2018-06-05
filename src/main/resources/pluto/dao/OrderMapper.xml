@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pluto.dao.OrderMapper" >
+  <resultMap id="BaseResultMap" type="pluto.entity.Order" >
+    <id column="orderid" property="orderid" jdbcType="INTEGER" />
+    <result column="orderdate" property="orderdate" jdbcType="DATE" />
+    <result column="totalprice" property="totalprice" jdbcType="DOUBLE" />
+    <result column="orderstatus" property="orderstatus" jdbcType="VARCHAR" />
+    <result column="paywayid" property="paywayid" jdbcType="INTEGER" />
+    <result column="userid" property="userid" jdbcType="INTEGER" />
+    <result column="userconsumptionid" property="userconsumptionid" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    orderid, orderdate, totalprice, orderstatus, paywayid, userid, userconsumptionid
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_order
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_order
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pluto.entity.Order" >
+    insert into tbl_order (orderid, orderdate, totalprice, 
+      orderstatus, paywayid, userid, 
+      userconsumptionid)
+    values (#{orderid,jdbcType=INTEGER}, #{orderdate,jdbcType=DATE}, #{totalprice,jdbcType=DOUBLE}, 
+      #{orderstatus,jdbcType=VARCHAR}, #{paywayid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
+      #{userconsumptionid,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pluto.entity.Order" >
+    update tbl_order
+    set orderdate = #{orderdate,jdbcType=DATE},
+      totalprice = #{totalprice,jdbcType=DOUBLE},
+      orderstatus = #{orderstatus,jdbcType=VARCHAR},
+      paywayid = #{paywayid,jdbcType=INTEGER},
+      userid = #{userid,jdbcType=INTEGER},
+      userconsumptionid = #{userconsumptionid,jdbcType=INTEGER}
+    where orderid = #{orderid,jdbcType=INTEGER}
+  </update>
+</mapper>

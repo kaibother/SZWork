@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pluto.dao.CountryMapper" >
+  <resultMap id="BaseResultMap" type="pluto.entity.Country" >
+    <id column="countryid" property="countryid" jdbcType="INTEGER" />
+    <result column="counryname" property="counryname" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    countryid, counryname
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from tbl_country
+    where countryid = #{countryid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from tbl_country
+    where countryid = #{countryid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="pluto.entity.Country" >
+    insert into tbl_country (countryid, counryname)
+    values (#{countryid,jdbcType=INTEGER}, #{counryname,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pluto.entity.Country" >
+    update tbl_country
+    set counryname = #{counryname,jdbcType=VARCHAR}
+    where countryid = #{countryid,jdbcType=INTEGER}
+  </update>
+</mapper>
