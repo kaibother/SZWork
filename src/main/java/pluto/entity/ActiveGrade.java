@@ -3,7 +3,7 @@ package pluto.entity;
 public class ActiveGrade {
     private Integer activegradeid;
 
-    private String acticegrade;
+    private String activegrade;
 
     private Double activeprice;
 
@@ -16,11 +16,11 @@ public class ActiveGrade {
     }
 
     public String getActicegrade() {
-        return acticegrade;
+        return activegrade;
     }
 
     public void setActicegrade(String acticegrade) {
-        this.acticegrade = acticegrade == null ? null : acticegrade.trim();
+        this.activegrade = acticegrade == null ? null : acticegrade.trim();
     }
 
     public Double getActiveprice() {

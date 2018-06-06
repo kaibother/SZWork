@@ -1,10 +1,12 @@
 package pluto.dao;
 
-import pluto.entity.ActiveGrade;
+
+
+import java.util.List;
 
 public interface ActiveGradeMapper {
-    int deleteByPrimaryKey(Integer activegradeid);
-    int insert(ActiveGrade record);
-    ActiveGrade selectByPrimaryKey(Integer activegradeid);
-    int updateByPrimaryKey(ActiveGrade record);
+    //查询所有等级
+    List<String> selectAllActiveGrade();
+    //根据等级查询对应价格
+    Double selectPriceByActiveGrade(String activeGrade);
 }
