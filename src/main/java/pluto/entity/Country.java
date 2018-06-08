@@ -3,7 +3,7 @@ package pluto.entity;
 public class Country {
     private Integer countryid;
 
-    private String counryname;
+    private String countryname;
 
     public Integer getCountryid() {
         return countryid;
@@ -13,11 +13,11 @@ public class Country {
         this.countryid = countryid;
     }
 
-    public String getCounryname() {
-        return counryname;
+    public String getCountryname() {
+        return countryname;
     }
 
-    public void setCounryname(String counryname) {
-        this.counryname = counryname == null ? null : counryname.trim();
+    public void setCountryname(String countryname) {
+        this.countryname = countryname;
     }
 }
