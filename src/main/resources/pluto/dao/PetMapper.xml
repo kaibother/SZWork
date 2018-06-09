@@ -5,8 +5,8 @@
 
   <!--boolean insertPet(Pet pet);-->
   <insert id="insertPet" parameterType="Pet" useGeneratedKeys="true" keyProperty="petid">
-    insert INTO tbl_pet
-    VALUES(#{petid},#{dogtype.dogtypeid},#{dogbirthday},#{dogname},#{user.userid})
+    insert INTO tbl_pet(dogtypeid,dogbirthday,dogname,userid)
+    VALUES(#{dogtype.dogtypeid},#{dogbirthday},#{dogname},#{user.userid})
   </insert>
 
   <!--boolean updatePet(Pet pet);-->

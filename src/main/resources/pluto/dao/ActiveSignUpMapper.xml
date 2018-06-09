@@ -40,8 +40,8 @@
 
  <!-- boolean insertActiveSignUp(ActiveSignUp activeSignUp);-->
   <insert id="insertActiveSignUp" parameterType="ActiveSignUp" useGeneratedKeys="true" keyProperty="signupid">
-    INSERT  into tbl_activesignup
-    VALUES (#{signupid},#{user.userid},#{activedate},#{activetype.activetypeid},#{activegrade.activegradeid})
+    INSERT  into tbl_activesignup(userid,activedate,activetypeid,activegradeid)
+    VALUES (#{user.userid},#{activedate},#{activetype.activetypeid},#{activegrade.activegradeid})
   </insert>
  <!-- boolean updateActiveSignUp(ActiveSignUp activeSignUp);-->
   <update id="updateActiveSignUp" parameterType="ActiveSignUp">

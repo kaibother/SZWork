@@ -49,7 +49,7 @@
 
   <!--boolean insertFosterDetail(FosterDetail fosterDetail);-->
   <insert id="insertFosterDetail" parameterType="FosterDetail" useGeneratedKeys="true" keyProperty="fosterdetailid">
-    insert into tbl_fosterdetail VALUES(#{fosterdetailid},#{fosterday},#{fostertotalprice},#{doghousegrade.doghousegradeid},#{pet.petid})
+    insert into tbl_fosterdetail(fosterday,fostertotalprice,doghousegradeid,petid) VALUES(#{fosterday},#{fostertotalprice},#{doghousegrade.doghousegradeid},#{pet.petid})
   </insert>
 
   <!--boolean updateFosterDetail(FosterDetail fosterDetail);-->

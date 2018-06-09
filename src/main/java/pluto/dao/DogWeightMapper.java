@@ -2,13 +2,13 @@ package pluto.dao;
 
 import pluto.entity.DogWeight;
 
+import java.util.List;
+
 public interface DogWeightMapper {
+    //查出所有实体
+    List<DogWeight>selectAllDogWeight();
+    //按照id查询weight
+    DogWeight selectDogWeightById(Integer dogweightid);
 
-    int deleteByPrimaryKey(Integer digweightid);
-
-    int insert(DogWeight record);
-
-    DogWeight selectByPrimaryKey(Integer digweightid);
-
-    int updateByPrimaryKey(DogWeight record);
+    Double selectDogWeightDiscountByWeight(Double weight);
 }
