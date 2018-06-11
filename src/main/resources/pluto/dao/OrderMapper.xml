@@ -1,44 +1,68 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="pluto.dao.OrderMapper" >
-  <resultMap id="BaseResultMap" type="pluto.entity.Order" >
-    <id column="orderid" property="orderid" jdbcType="INTEGER" />
-    <result column="orderdate" property="orderdate" jdbcType="DATE" />
-    <result column="totalprice" property="totalprice" jdbcType="DOUBLE" />
-    <result column="orderstatus" property="orderstatus" jdbcType="VARCHAR" />
-    <result column="paywayid" property="paywayid" jdbcType="INTEGER" />
-    <result column="userid" property="userid" jdbcType="INTEGER" />
-    <result column="userconsumptionid" property="userconsumptionid" jdbcType="INTEGER" />
+  <resultMap id="selectByByOrderIdMapper" type="pluto.entity.Order" >
+    <id column="orderid" property="orderid"  />
+    <result column="orderdate" property="orderdate" />
+    <result column="totalprice" property="totalprice"  />
+    <result column="orderstatus" property="orderstatus"  />
+    <association property="userconsumption" javaType="UserConsumption">
+      <result column="userconsumptionid" property="userconsumptionid"></result>
+      <result column="consumptionamount" property="consumptionamount"></result>
+      <result column="rechargeamount" property="rechargeamount"></result>
+    </association>
+    <association property="payway" javaType="PayWay">
+      <result column="paywayid" property="paywayid"></result>
+      <result column="paywayname" property="paywayname"></result>
+    </association>
+    <association property="user" javaType="User">
+      <result column="userid" property="userid"></result>
+      <result column="username" property="username"></result>
+      <result column="password" property="password"></result>
+      <result column="tel" property="tel"></result>
+      <result column="userbalance" property="userbalance"></result>
+      <result column="vip" property="vip"></result>
+    </association>
   </resultMap>
-  <sql id="Base_Column_List" >
-    orderid, orderdate, totalprice, orderstatus, paywayid, userid, userconsumptionid
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tbl_order
-    where orderid = #{orderid,jdbcType=INTEGER}
+
+
+  <!-- Order selectByByOrderId(Integer orderid);-->
+  <select id="selectByByOrderId" resultMap="selectByByOrderIdMapper" parameterType="java.lang.Integer" >
+    select  o.* ,p.*,u.*,us.*
+    from tbl_order o,tbl_payway p,tbl_user u,tbl_userconsumption us
+    where orderid = #{orderid}
+    and o.paywayid=p.paywayid
+    and o.userid=u.userid
+    and o.userconsumptionid=us.userconsumptionid
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+
+  <!--boolean deleteByOrderId(Integer orderid);-->
+  <delete id="deleteByOrderId" parameterType="java.lang.Integer" >
     delete from tbl_order
-    where orderid = #{orderid,jdbcType=INTEGER}
+    where orderid = #{orderid}
   </delete>
+
+
+  <!--boolean insert(Order record);-->
   <insert id="insert" parameterType="pluto.entity.Order" >
-    insert into tbl_order (orderid, orderdate, totalprice, 
-      orderstatus, paywayid, userid, 
-      userconsumptionid)
-    values (#{orderid,jdbcType=INTEGER}, #{orderdate,jdbcType=DATE}, #{totalprice,jdbcType=DOUBLE}, 
-      #{orderstatus,jdbcType=VARCHAR}, #{paywayid,jdbcType=INTEGER}, #{userid,jdbcType=INTEGER}, 
-      #{userconsumptionid,jdbcType=INTEGER})
+    insert into tbl_order (orderid, orderdate, totalprice,
+    orderstatus, paywayid, userid,
+    userconsumptionid)
+    values (#{orderid}, #{orderdate}, #{totalprice},
+    #{orderstatus}, #{payway.paywayid}, #{user.userid},
+    #{userconsumption.userconsumptionid})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="pluto.entity.Order" >
+
+  <!--boolean updateByOrderId(Order record);-->
+  <update id="updateByOrderId" parameterType="pluto.entity.Order" >
     update tbl_order
-    set orderdate = #{orderdate,jdbcType=DATE},
-      totalprice = #{totalprice,jdbcType=DOUBLE},
-      orderstatus = #{orderstatus,jdbcType=VARCHAR},
-      paywayid = #{paywayid,jdbcType=INTEGER},
-      userid = #{userid,jdbcType=INTEGER},
-      userconsumptionid = #{userconsumptionid,jdbcType=INTEGER}
-    where orderid = #{orderid,jdbcType=INTEGER}
+    set orderdate = #{orderdate},
+      totalprice = #{totalprice},
+      orderstatus = #{orderstatus},
+      paywayid =#{payway.paywayid},
+      userid =  #{user.userid},
+      userconsumptionid = #{userconsumption.userconsumptionid}
+    where orderid=#{orderid}
   </update>
 </mapper>

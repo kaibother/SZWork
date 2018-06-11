@@ -4,12 +4,12 @@ import pluto.entity.Brand;
 
 public interface BrandMapper {
 
-    int deleteByPrimaryKey(Integer brandid);
+    boolean deleteByBrandId(Integer brandid);
 
-    int insert(Brand record);
+    boolean insert(Brand record);
 
-    Brand selectByPrimaryKey(Integer brandid);
+    Brand selectByBrandId(Integer brandid);
 
 
-    int updateByPrimaryKey(Brand record);
+    boolean updateByBrandId(Brand record);
 }

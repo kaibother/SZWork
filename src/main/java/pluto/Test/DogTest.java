@@ -30,7 +30,6 @@ public class DogTest {
     DogCommonDiseaseMapper dogCommonDiseaseMapper;
     @Test
     public void testweight(){
-        System.out.println(dogWeightMapper.selectDogWeightDiscountByWeight(15.0));
         System.out.println(dogWeightMapper.selectDogWeightById(1001));
         List<DogWeight>dogWeights=dogWeightMapper.selectAllDogWeight();
         for(DogWeight dogWeight:dogWeights){

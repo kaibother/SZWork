@@ -30,6 +30,27 @@
         <result column="vip" property="vip"/>
       </association>
     </association>
+    <association property="order" javaType="Order">
+      <id column="orderid" property="orderid"></id>
+      <result column="orderdate" property="orderdate"></result>
+      <result column="totalprice" property="totalprice"></result>
+      <result column="orderstatus" property="orderstatus"></result>
+      <association property="user" javaType="User">
+        <id column="userid" property="userid"></id>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="tel" property="tel"></result>
+        <result column="userbalance" property="userbalance"></result>
+      </association>
+      <association property="userconsumption" javaType="UserConsumption">
+        <id column="userconsumptionid" property="userconsumptionid"></id>
+        <result column="consumptionamount" property="consumptionamount"></result>
+      </association>
+      <association property="payway" javaType="PayWay">
+        <id column="paywayid" property="paywayid"></id>
+        <result column="paywayname" property="paywayname"></result>
+      </association>
+    </association>
   </resultMap>
 
   <!--//按照fosterdetailid查询
@@ -66,5 +87,20 @@
   <!--boolean deleteFosterDetailByPetId(Integer petid);-->
   <delete id="deleteFosterDetailByPetId" parameterType="Integer">
     delete  from tbl_fosterdetail WHERE petid=#{_parameter}
+  </delete>
+
+
+
+ <!-- FosterDetail selectFosterDetailByOrderId(Integer orderid);-->
+  <select id="selectFosterDetailByOrderId" parameterType="Integer" resultMap="selectFosterDetailMap">
+    select * FROM  tbl_fosterdetail detail,tbl_doghousegrade grade,tbl_pet pet,tbl_dogtype type,tbl_user user,tbl_order order1,tbl_payway pw,tbl_userconsumption uc
+    where detail.doghousegradeid=grade.doghousegradeid AND detail.petid=pet.petid AND pet.dogtypeid=type.dogtypeid
+    and pet.userid=user.userid and detail.orderid=#{_parameter}
+   and detail.orderid=order1.orderid and order1.paywayid=pw.paywayid and order1.userconsumptionid=uc.userconsumptionid and order1.userid=user.userid
+  </select>
+
+  <!--boolean deleteFosterDetailByOrderId(Integer orderid);-->
+  <delete id="deleteFosterDetailByOrderId" parameterType="Integer">
+    delete from tbl_fosterdetail WHERE orderid=#{_parameter}
   </delete>
 </mapper>

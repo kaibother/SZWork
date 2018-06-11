@@ -11,65 +11,75 @@ public class Order {
 
     private String orderstatus;
 
-    private Integer paywayid;
+    private PayWay payway;
 
-    private Integer userid;
+    private User user;
 
-    private Integer userconsumptionid;
+    private UserConsumption userconsumption;
 
-    public Integer getOrderid() {
-        return orderid;
+    @Override
+    public String toString() {
+        return "Order{" +
+                "orderid=" + orderid +
+                ", orderdate=" + orderdate +
+                ", totalprice=" + totalprice +
+                ", orderstatus='" + orderstatus + '\'' +
+                ", payway=" + payway +
+                ", user=" + user +
+                ", userconsumption=" + userconsumption +
+                '}';
     }
 
-    public void setOrderid(Integer orderid) {
-        this.orderid = orderid;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Order order = (Order) o;
+
+        if (orderid != null ? !orderid.equals(order.orderid) : order.orderid != null) return false;
+        if (orderdate != null ? !orderdate.equals(order.orderdate) : order.orderdate != null) return false;
+        if (totalprice != null ? !totalprice.equals(order.totalprice) : order.totalprice != null) return false;
+        if (orderstatus != null ? !orderstatus.equals(order.orderstatus) : order.orderstatus != null) return false;
+        if (payway != null ? !payway.equals(order.payway) : order.payway != null) return false;
+        if (user != null ? !user.equals(order.user) : order.user != null) return false;
+        return userconsumption != null ? userconsumption.equals(order.userconsumption) : order.userconsumption == null;
     }
 
-    public Date getOrderdate() {
-        return orderdate;
+    @Override
+    public int hashCode() {
+        int result = orderid != null ? orderid.hashCode() : 0;
+        result = 31 * result + (orderdate != null ? orderdate.hashCode() : 0);
+        result = 31 * result + (totalprice != null ? totalprice.hashCode() : 0);
+        result = 31 * result + (orderstatus != null ? orderstatus.hashCode() : 0);
+        result = 31 * result + (payway != null ? payway.hashCode() : 0);
+        result = 31 * result + (user != null ? user.hashCode() : 0);
+        result = 31 * result + (userconsumption != null ? userconsumption.hashCode() : 0);
+        return result;
     }
 
-    public void setOrderdate(Date orderdate) {
+    public Order(Date orderdate, Double totalprice, String orderstatus, PayWay payway, User user, UserConsumption userconsumption) {
+
         this.orderdate = orderdate;
-    }
-
-    public Double getTotalprice() {
-        return totalprice;
-    }
-
-    public void setTotalprice(Double totalprice) {
         this.totalprice = totalprice;
+        this.orderstatus = orderstatus;
+        this.payway = payway;
+        this.user = user;
+        this.userconsumption = userconsumption;
     }
 
-    public String getOrderstatus() {
-        return orderstatus;
+    public Order(Integer orderid, Date orderdate, Double totalprice, String orderstatus, PayWay payway, User user, UserConsumption userconsumption) {
+
+        this.orderid = orderid;
+        this.orderdate = orderdate;
+        this.totalprice = totalprice;
+        this.orderstatus = orderstatus;
+        this.payway = payway;
+        this.user = user;
+        this.userconsumption = userconsumption;
     }
 
-    public void setOrderstatus(String orderstatus) {
-        this.orderstatus = orderstatus == null ? null : orderstatus.trim();
-    }
+    public Order() {
 
-    public Integer getPaywayid() {
-        return paywayid;
-    }
-
-    public void setPaywayid(Integer paywayid) {
-        this.paywayid = paywayid;
-    }
-
-    public Integer getUserid() {
-        return userid;
-    }
-
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
-
-    public Integer getUserconsumptionid() {
-        return userconsumptionid;
-    }
-
-    public void setUserconsumptionid(Integer userconsumptionid) {
-        this.userconsumptionid = userconsumptionid;
     }
 }

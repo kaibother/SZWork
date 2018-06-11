@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+    <script src="../jquery-1.11.2.js"></script>
+</head>
+	
+<body>
+    <table width="400" border="1">
+        <tr>
+            <td id="t1">&nbsp;aaaaaaaaa</td>
+
+        </tr>
+
+    </table>
+	<script>
+        $(document).ready(function () {
+            var t1 = $('td');
+            t1.click(function () {
+             var inpt =$('input');
+                t1.append(inpt);
+             var val =  t1.innerHTML
+               val='';
+
+            });
+
+        });
+    </script>
+
+
+</body>
+</html>

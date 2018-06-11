@@ -1,14 +1,18 @@
 package pluto.dao;
 
+
 import pluto.entity.DogWeight;
 
 import java.util.List;
 
-public interface DogWeightMapper {
-    //查出所有实体
-    List<DogWeight>selectAllDogWeight();
-    //按照id查询weight
-    DogWeight selectDogWeightById(Integer dogweightid);
 
-    Double selectDogWeightDiscountByWeight(Double weight);
+public interface DogWeightMapper {
+
+    /*查询所有狗狗重量*/
+    List<DogWeight>selectAllDogWeight();
+
+    /*根据狗狗重量查询折扣*/
+    public DogWeight selectDiscountByDogWeight( Integer maxdogweight,Integer mindogweight);
+
+    DogWeight selectDogWeightById(Integer dogweightid);
 }

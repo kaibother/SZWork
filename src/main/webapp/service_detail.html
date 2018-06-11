@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html >
+  <head>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>服务详情页</title>
+<meta name="keywords" content="首页" />
+<meta name="description" content="首页" />
+ <link rel="stylesheet" type="text/css" href="css/service_detail_css/normalize.css"/>
+ <script type="text/javascript" src="js/service_detail_js/jquery-1.9.1.min.js"></script>
+ <script src="js/service_detail_js/common.js" type="text/javascript" charset="utf-8"></script>
+   <script type="text/javascript">
+  $(document).ready(function(){
+	  var showproduct = {
+		  "boxid":"showbox",
+		  "sumid":"showsum",
+		  "boxw":400,//宽度,该版本中请把宽高填写成一样
+		  "boxh":400,//高度,该版本中请把宽高填写成一样
+		  "sumw":60,//列表每个宽度,该版本中请把宽高填写成一样
+		  "sumh":60,//列表每个高度,该版本中请把宽高填写成一样
+		  "sumi":7,//列表间隔
+		  "sums":5,//列表显示个数
+		  "sumsel":"sel",
+		  "sumborder":1,//列表边框，没有边框填写0，边框在css中修改
+		  "lastid":"showlast",
+		  "nextid":"shownext"
+		  };//参数定义	  
+	 $.ljsGlasses.pcGlasses(showproduct);//方法调用，务必在加载完后执行
+  });
+</script>
+</head>
+<body>
+ <div class="showall">
+	                <!--left -->
+	                <div class="showbot">
+                    <div id="showbox">
+                        <img src="images/service_detail_images/photos/tt1.png" width="400" height="400" />
+                        <img src="images/service_detail_images/photos/tt2.png" width="400" height="400" />
+                        <img src="images/service_detail_images/photos/tt3.png" width="400" height="400" />
+                        <img src="images/service_detail_images/photos/tt4.png" width="400" height="400" />
+                       
+                        
+                    </div><!--展示图片盒子-->
+                        <div id="showsum">
+                        	<!--展示图片里边-->
+                        </div>
+                        <p class="showpage">
+                            <a href="javascript:void(0);" id="showlast"> < </a>
+                            <a href="javascript:void(0);" id="shownext"> > </a>
+                        </p>
+                        </div>
+                        <!--conet -->
+                        <div class="tb-property">
+                        	<div class="tr-nobdr">
+                        		<h3> 布鲁托至尊修剪</h3>
+                        	</div>
+                        		<div class="txt">
+                        			<span class="nowprice">￥<a href="">199.00</a></span>
+                        			<div class="cumulative">
+                        				<span class="number ty1">累计售出<br /><em id="add_sell_num_363">370</em></span>
+                        				
+                        			</div>
+                        		</div>
+                        	<div class="txt-h">
+                        		<span class="tex-o">分类</span>
+                        		<ul class="glist" id="glist" data-monitor="goodsdetails_fenlei_click">
+                        			<li><a title="Assistant" href="">助手修剪</a></li>
+                        			<li><a title="Director" href="">总监修剪</a></li>
+                        		
+                        		</ul>
+                        	</div>
+                        	<script>
+                        	$(document).ready(function(){
+                        	//����ı������
+                          	var t = $("#text_box");
+                        	//��ʼ������Ϊ1,��ʧЧ��
+                        	$('#min').attr('disabled',true);
+                            	//�������Ӳ���
+                            	$("#add").click(function(){    
+                               	 t.val(parseInt(t.val())+1)
+                               	 if (parseInt(t.val())!=1){
+                                   	 $('#min').attr('disabled',false);
+                                	}
+      
+                           	 }) 
+                            	//�������ٲ���
+                            	$("#min").click(function(){
+                                	t.val(parseInt(t.val())-1);
+                                	if (parseInt(t.val())==1){
+                                   	 $('#min').attr('disabled',true);
+                                	}
+      
+                            	})  
+                        	});
+                        	</script>  
+                        	<div class="gcIpt">
+                        		<span class="guT">数量</span>
+                        		<input id="min" name="" type="button" value="-" />  
+                        		<input id="text_box" name="" type="text" value="1"style="width:30px; text-align: center; color: #0F0F0F;"/>  
+                        		<input id="add" name="" type="button" value="+" />
+                 
+                        	</div>
+                        	<div class="nobdr-btns">
+                        		<button class="addcart hu"><img src="images/service_detail_images/shop.png" width="25" height="25"/><a href="#">替狗狗放入购物车</a></button>
+                        		<button class="addcart yh"><img src="images/service_detail_images/ht.png" width="25" height="25"/><a href="#">立即为狗狗购买</a></button>
+                        	</div>
+                        </div>
+                        <!--right -->
+                        <div class="extInfo">
+            	            <div class="brand-logo">
+            	             	<a href="" title="奥影汽车影音">
+            	             		<img src="images/service_detail_images/ho_03.png"/>
+            	             	</a>
+            	            </div>
+            	            <div class="seller-pop-box">
+            	            	<span class="tr">商家名称：布鲁托</span>
+            	            	<span class="tr">商家等级：高级宠物店</span>
+            	            	<span class="tr">商家电话：888888888</span>
+            	            	<span class="tr hoh">
+            	            		<a title="江苏省苏州市独墅湖工业园区林泉街1号" href="">所在地区：江苏省苏州市独墅湖工业园区林泉街1号57号</a>
+            	            	</span>
+            	            </div>
+            	            <div class="seller-phone">
+            	            	<span class="pop im">
+            	            		<a href="" data-name="联系卖家"><img src="images/service_detail_images/phon.png"/>联系我们</a>
+            	            	</span>
+            	            	<span class="pop in">
+            	            		<a href="" data-name="咨询卖家"><img src="images/service_detail_images/qq.png"/>咨询情况</a>
+            	            	</span>
+            	            	<span class="pop in">
+            	            		<a href="" data-name="进店逛逛"><img src="images/service_detail_images/shop-line.png"/>商城逛逛</a>
+            	            	</span>
+            	            	<span class="pop in">
+            	            		<a href="" data-name="关注店铺"><img src="images/service_detail_images/staar.png"/>回到首页</a>
+            	            	</span>
+            	            </div>
+            	            <div class="jd-service">
+            	            	<a href="">
+            	            		<img src="images/service_detail_images/ho_07.png"/>
+            	            	</a>
+            	            </div>
+            	            
+                        </div>
+                    </div>                
+<!-- 推荐搭配 -->                
+               
+                	
+                	
+<!-- 商品介紹 -->                
+                <div class="gdetail">
+                	<!-- left -->
+                	<div class="aside">
+                		  <h3>看了还看<span><img src="images/service_detail_images/fod.png"width="22" height="22"/>换一批</span></h3>
+                		  <dl class="ac-mod-list">
+                		  	<dt><a href=""><img src="images/service_detail_images/hdy_09.png"/></a></dt>
+                		  	<dd>
+                		  		  助手理毛
+                		  		  <span>￥99</span>
+                		  	</dd>
+                		  </dl>
+                		  <dl class="ac-mod-list">
+                		  	<dt><a href=""><img src="images/service_detail_images/hdy_07.png"/></a></dt>
+                		  	<dd>
+                		  		 狗狗洗澡
+                		  		  <span>￥99</span>
+                		  	</dd>
+                		  </dl>
+                		  <dl class="ac-mod-list">
+                		  	<dt><a href=""><img src="images/service_detail_images/hdy_11.png"/></a></dt>
+                		  	<dd>
+                		  		  狗狗沐浴
+                		  		  <span>￥99</span>
+                		  	</dd>
+                		  </dl>
+                	</div>
+                	<!-- right -->
+                	<script>
+                	var detail = document.querySelector('.detail');
+var origOffsetY = detail.offsetTop;
+function onScroll(e) {
+window.scrollY >= origOffsetY ? detail.classList.add('sticky') :
+detail.classList.remove('sticky');
+}
+document.addEventListener('scroll', onScroll); 
+</script>
+                	<div class="detail">
+                		<div class="active_tab" id="outer">
+													<ul class="act_title_left" id="tab">
+														<li class="act_active">
+															<a href="#">服务介绍</a>
+														</li>
+														<li>
+															<a href="#">详情展示</a>
+														</li>
+														
+													</ul>
+													<ul class="act_title_right">
+														<li class="mui-ac">
+															<a href="#">加入购物车</a>
+														</li>
+													</ul>
+													<div class="clear"></div>
+												</div>
+												<div id="content" class="active_list"> 
+													<!--0-->
+													<div id="ui-a" class="ui-a">
+												        <ul style="display:block;">
+												        <li>服务名称：布鲁托至尊修剪</li>
+												        <li><img src="images/service_detail_images/kk1.jpg"/></li>
+												        <li><img src="images/service_detail_images/kk2.jpg"/></li>
+												        <li><img src="images/service_detail_images/kk3.jpg"/></li>
+												        </ul>
+												   </div>
+												   <!--商品规格-->
+												    	<div id="bit" class="bit">
+												        <ul style="display:none;">
+												            <li><img src="images/service_detail_images/kk1.jpg"/></li>
+												            <li><img src="images/service_detail_images/kk2.jpg"/></li>
+												            <li><img src="images/service_detail_images/kk3.jpg"/></li>
+												            
+												                
+												       </ul>
+												       </div>
+												       
+												 <!--商品评价-->      
+												   
+												    <div id="ui-c" class="ui-c">
+												         <ul style="display:none;">
+												         	
+												         </ul>
+												    </div>
+												 <!--售后保障-->
+												 
+												</div>
+												<script>
+													$(function(){
+														window.onload = function()
+														{
+															var $li = $('#tab li');
+															var $ul = $('#content ul');
+																		
+															$li.mouseover(function(){
+																var $this = $(this);
+																var $t = $this.index();
+																$li.removeClass();
+																$this.addClass('act_active');
+																$ul.css('display','none');
+																$ul.eq($t).css('display','block');
+															})
+														}
+													});  
+												</script>
+                	</div>
+                </div>
+                
+</body>
+</html>

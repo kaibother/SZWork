@@ -1,63 +1,531 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="pluto.dao.GoodsMapper" >
-  <resultMap id="BaseResultMap" type="pluto.entity.Goods" >
-    <id column="goodsid" property="goodsid" jdbcType="INTEGER" />
-    <result column="goodsname" property="goodsname" jdbcType="VARCHAR" />
-    <result column="goodstypeid" property="goodstypeid" jdbcType="INTEGER" />
-    <result column="brandid" property="brandid" jdbcType="INTEGER" />
-    <result column="weight" property="weight" jdbcType="DOUBLE" />
-    <result column="size" property="size" jdbcType="VARCHAR" />
-    <result column="disease" property="disease" jdbcType="VARCHAR" />
-    <result column="dogsizeid" property="dogsizeid" jdbcType="INTEGER" />
-    <result column="stock" property="stock" jdbcType="INTEGER" />
-    <result column="type" property="type" jdbcType="VARCHAR" />
-    <result column="nowprice" property="nowprice" jdbcType="DOUBLE" />
-    <result column="originalprice" property="originalprice" jdbcType="DOUBLE" />
-    <result column="vipprice" property="vipprice" jdbcType="DOUBLE" />
-    <result column="countryid" property="countryid" jdbcType="INTEGER" />
+<mapper namespace="pluto.dao.GoodsMapper">
+
+
+
+  <!--Goods selectByGoodsId(Integer goodsid);-->
+  <resultMap id="selectByGoodsIdMapper" type="Goods">
+    <id column="goodsid" property="goodsid"></id>
+    <result column="goodsname" property="goodsname"></result>
+
+    <result column="weight" property="weight"></result>
+    <result column="size" property="size"></result>
+    <result column="disease" property="disease"></result>
+
+    <result column="stock" property="stock"></result>
+    <result column="type" property="type"></result>
+    <result column="nowprice" property="nowprice"></result>
+    <result column="originalprice" property="originalprice"></result>
+    <result column="vipprice" property="vipprice"></result>
+
+    <association property="goodscategory" javaType="GoodsCategory">
+      <result column="categoryname" property="categoryname"></result>
+      <result column="goodscategoryid" property="goodscategoryid"></result>
+    </association>
+    <association property="brand" javaType="Brand">
+      <result column="brandname" property="brandname"></result>
+      <result column="brandid" property="brandid"></result>
+    </association>
+    <association property="dogsize" javaType="Dogsize">
+      <result column="dogsize" property="dogsize"></result>
+      <result column="dogsizeid" property="dogsizeid"></result>
+    </association>
+    <association property="country" javaType="Country">
+      <result column="countryname" property="countryname"></result>
+      <result column="countryid" property="countryid"></result>
+    </association>
   </resultMap>
-  <sql id="Base_Column_List" >
-    goodsid, goodsname, goodstypeid, brandid, weight, size, disease, dogsizeid, stock, 
-    type, nowprice, originalprice, vipprice, countryid
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tbl_goods
-    where goodsid = #{goodsid,jdbcType=INTEGER}
+  <select id="selectByGoodsId" resultMap="selectByGoodsIdMapper">
+    select g.*,ca.categoryname,b.brandname,d.dogsize,co.countryname
+    from tbl_goods g,tbl_goodscategory ca,tbl_brand b,tbl_country co,tbl_dogsize d
+    where
+    g.goodscategoryid=ca.goodscategoryid
+    and g.brandid=b.brandid
+    and g.countryid=co.countryid
+    and g.dogsizeid=d.dogsizeid
+    and g.goodsid=#{goodsid}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tbl_goods
-    where goodsid = #{goodsid,jdbcType=INTEGER}
+
+
+
+  <!--Goods selectNoDogsizeByGoodsId(Integer goodsid);-->
+  <resultMap id="selectNoDogsizeByGoodsIdMapper" type="Goods">
+    <id column="goodsid" property="goodsid"></id>
+    <result column="goodsname" property="goodsname"></result>
+
+    <result column="weight" property="weight"></result>
+    <result column="size" property="size"></result>
+    <result column="disease" property="disease"></result>
+
+    <result column="stock" property="stock"></result>
+    <result column="type" property="type"></result>
+    <result column="nowprice" property="nowprice"></result>
+    <result column="originalprice" property="originalprice"></result>
+    <result column="vipprice" property="vipprice"></result>
+
+    <association property="goodscategory" javaType="GoodsCategory">
+      <result column="categoryname" property="categoryname"></result>
+      <result column="goodscategoryid" property="goodscategoryid"></result>
+    </association>
+    <association property="brand" javaType="Brand">
+      <result column="brandname" property="brandname"></result>
+      <result column="brandid" property="brandid"></result>
+    </association>
+    <association property="dogsize" javaType="Dogsize">
+      <result column="dogsize" property="dogsize"></result>
+      <result column="dogsizeid" property="dogsizeid"></result>
+    </association>
+    <association property="country" javaType="Country">
+      <result column="countryname" property="countryname"></result>
+      <result column="countryid" property="countryid"></result>
+    </association>
+  </resultMap>
+  <select id="selectNoDogsizeByGoodsId" resultMap="selectNoDogsizeByGoodsIdMapper">
+    select g.*,ca.categoryname,b.brandname,co.countryname
+    from tbl_goods g,tbl_goodscategory ca,tbl_brand b,tbl_country co
+    where
+    g.goodscategoryid=ca.goodscategoryid
+    and g.brandid=b.brandid
+    and g.countryid=co.countryid
+    and g.goodsid=#{goodsid}
+  </select>
+
+
+
+  <resultMap id="selectByTypeMapper" type="Goods">
+    <id column="goodsid" property="goodsid"></id>
+    <result column="goodsname" property="goodsname"></result>
+
+    <result column="weight" property="weight"></result>
+    <result column="size" property="size"></result>
+    <result column="disease" property="disease"></result>
+
+    <result column="stock" property="stock"></result>
+    <result column="type" property="type"></result>
+    <result column="nowprice" property="nowprice"></result>
+    <result column="originalprice" property="originalprice"></result>
+    <result column="vipprice" property="vipprice"></result>
+
+    <association property="goodscategory" javaType="GoodsCategory">
+      <result column="categoryname" property="categoryname"></result>
+      <result column="goodscategoryid" property="goodscategoryid"></result>
+    </association>
+    <association property="brand" javaType="Brand">
+      <result column="brandname" property="brandname"></result>
+      <result column="brandid" property="brandid"></result>
+    </association>
+    <association property="dogsize" javaType="Dogsize">
+      <result column="dogsize" property="dogsize"></result>
+      <result column="dogsizeid" property="dogsizeid"></result>
+    </association>
+    <association property="country" javaType="Country">
+      <result column="countryname" property="countryname"></result>
+      <result column="countryid" property="countryid"></result>
+    </association>
+
+  </resultMap>
+  <!-- List<Goods> selectByType(String type);-->
+  <select id="selectByType" resultMap="selectByTypeMapper">
+    select g.*,ca.categoryname,b.brandname,d.dogsize,co.countryname
+    from tbl_goods g,tbl_goodscategory ca,tbl_brand b,tbl_country co,tbl_dogsize d
+    where
+    g.goodscategoryid=ca.goodscategoryid
+    and g.brandid=b.brandid
+    and g.countryid=co.countryid
+    and g.dogsizeid=d.dogsizeid
+    and type=#{type}
+  </select>
+
+  <!-- List<Goods> selectNoDogsizeByType(String type);-->
+  <resultMap id="selectNoDogsizeByTypeMapper" type="Goods">
+    <id column="goodsid" property="goodsid"></id>
+    <result column="goodsname" property="goodsname"></result>
+
+    <result column="weight" property="weight"></result>
+    <result column="size" property="size"></result>
+    <result column="disease" property="disease"></result>
+
+    <result column="stock" property="stock"></result>
+    <result column="type" property="type"></result>
+    <result column="nowprice" property="nowprice"></result>
+    <result column="originalprice" property="originalprice"></result>
+    <result column="vipprice" property="vipprice"></result>
+
+    <association property="goodscategory" javaType="GoodsCategory">
+      <result column="categoryname" property="categoryname"></result>
+      <result column="goodscategoryid" property="goodscategoryid"></result>
+    </association>
+    <association property="brand" javaType="Brand">
+      <result column="brandname" property="brandname"></result>
+      <result column="brandid" property="brandid"></result>
+    </association>
+    <association property="dogsize" javaType="Dogsize">
+      <result column="dogsize" property="dogsize"></result>
+      <result column="dogsizeid" property="dogsizeid"></result>
+    </association>
+    <association property="country" javaType="Country">
+      <result column="countryname" property="countryname"></result>
+      <result column="countryid" property="countryid"></result>
+    </association>
+
+  </resultMap>
+  <!-- List<Goods> selectNoDogsizeByType(String type);-->
+  <select id="selectNoDogsizeByType" resultMap="selectNoDogsizeByTypeMapper">
+    select g.*,ca.categoryname,b.brandname,co.countryname
+    from tbl_goods g,tbl_goodscategory ca,tbl_brand b,tbl_country co
+    where
+    g.goodscategoryid=ca.goodscategoryid
+    and g.brandid=b.brandid
+    and g.countryid=co.countryid
+    and type=#{type}
+  </select>
+
+
+  <!--List<Goods> selectByBrandId(String brandname);-->
+  <resultMap id="selectByBrandIdMapper" type="Goods">
+    <id column="goodsid" property="goodsid"></id>
+    <result column="goodsname" property="goodsname"></result>
+
+    <result column="weight" property="weight"></result>
+    <result column="size" property="size"></result>
+    <result column="disease" property="disease"></result>
+
+    <result column="stock" property="stock"></result>
+    <result column="type" property="type"></result>
+    <result column="nowprice" property="nowprice"></result>
+    <result column="originalprice" property="originalprice"></result>
+    <result column="vipprice" property="vipprice"></result>
+
+    <association property="goodscategory" javaType="GoodsCategory">
+      <result column="categoryname" property="categoryname"></result>
+      <result column="goodscategoryid" property="goodscategoryid"></result>
+    </association>
+    <association property="brand" javaType="Brand">
+      <result column="brandname" property="brandname"></result>
+
+    </association>
+    <association property="dogsize" javaType="Dogsize">
+      <result column="dogsize" property="dogsize"></result>
+      <result column="dogsizeid" property="dogsizeid"></result>
+    </association>
+    <association property="country" javaType="Country">
+      <result column="countryname" property="countryname"></result>
+      <result column="countryid" property="countryid"></result>
+    </association>
+  </resultMap>
+  <select id="selectByBrandId" resultMap="selectByBrandIdMapper" parameterType="Integer">
+    select g.*,ca.categoryname,b.brandname,d.dogsize,co.countryname
+    from tbl_goods g,tbl_goodscategory ca,tbl_brand b,tbl_country co,tbl_dogsize d
+    where
+    g.goodscategoryid=ca.goodscategoryid
+    and g.brandid=b.brandid
+    and g.countryid=co.countryid
+    and g.dogsizeid=d.dogsizeid
+    and g.brandid=#{_parameter}
+  </select>
+
+
+  <!-- List<Goods> selectNoDogsizeByBrand(String type);-->
+  <resultMap id="selectNoDogsizeByBrandMapper" type="Goods">
+    <id column="goodsid" property="goodsid"></id>
+    <result column="goodsname" property="goodsname"></result>
+
+    <result column="weight" property="weight"></result>
+    <result column="size" property="size"></result>
+    <result column="disease" property="disease"></result>
+
+    <result column="stock" property="stock"></result>
+    <result column="type" property="type"></result>
+    <result column="nowprice" property="nowprice"></result>
+    <result column="originalprice" property="originalprice"></result>
+    <result column="vipprice" property="vipprice"></result>
+
+    <association property="goodscategory" javaType="GoodsCategory">
+      <result column="categoryname" property="categoryname"></result>
+      <result column="goodscategoryid" property="goodscategoryid"></result>
+    </association>
+    <association property="brand" javaType="Brand">
+      <result column="brandname" property="brandname"></result>
+    </association>
+    <association property="dogsize" javaType="Dogsize">
+      <result column="dogsize" property="dogsize"></result>
+      <result column="dogsizeid" property="dogsizeid"></result>
+    </association>
+    <association property="country" javaType="Country">
+      <result column="countryname" property="countryname"></result>
+      <result column="countryid" property="countryid"></result>
+    </association>
+  </resultMap>
+  <select id="selectNoDogsizeByBrand" resultMap="selectNoDogsizeByBrandMapper" parameterType="Integer">
+    select g.*,ca.categoryname,b.brandname,co.countryname
+    from tbl_goods g,tbl_goodscategory ca,tbl_brand b,tbl_country co,tbl_dogsize d
+    where
+    g.goodscategoryid=ca.goodscategoryid
+    and g.brandid=b.brandid
+    and g.countryid=co.countryid
+    and g.brandid=#{_parameter}
+  </select>
+
+
+  <!--<List<Goods> selectByGoodsCategory(Integer goodscategoryid);-->
+  <resultMap id="selectByGoodsCategoryMapper" type="Goods">
+    <id column="goodsid" property="goodsid"></id>
+    <result column="goodsname" property="goodsname"></result>
+
+    <result column="weight" property="weight"></result>
+    <result column="size" property="size"></result>
+    <result column="disease" property="disease"></result>
+
+    <result column="stock" property="stock"></result>
+    <result column="type" property="type"></result>
+    <result column="nowprice" property="nowprice"></result>
+    <result column="originalprice" property="originalprice"></result>
+    <result column="vipprice" property="vipprice"></result>
+
+    <association property="goodscategory" javaType="GoodsCategory">
+      <result column="categoryname" property="categoryname"></result>
+      <result column="goodscategoryid" property="goodscategoryid"></result>
+    </association>
+    <association property="brand" javaType="Brand">
+      <result column="brandname" property="brandname"></result>
+      <result column="brandid" property="brandid"></result>
+    </association>
+    <association property="dogsize" javaType="Dogsize">
+      <result column="dogsize" property="dogsize"></result>
+      <result column="dogsizeid" property="dogsizeid"></result>
+    </association>
+    <association property="country" javaType="Country">
+      <result column="countryname" property="countryname"></result>
+      <result column="countryid" property="countryid"></result>
+    </association>
+  </resultMap>
+  <select id="selectByGoodsCategory" resultMap="selectByGoodsCategoryMapper" parameterType="Integer">
+    select g.*,ca.categoryname,b.brandname,d.dogsize,co.countryname
+    from tbl_goods g,tbl_goodscategory ca,tbl_brand b,tbl_country co,tbl_dogsize d
+    where
+    g.goodscategoryid=#{_parameter}
+    and g.brandid=b.brandid
+    and g.countryid=co.countryid
+    and g.dogsizeid=d.dogsizeid
+  </select>
+
+
+  <!--List<Goods> selectNoDogsizeByGoodsCategory(Integer goodscategoryid);;-->
+  <resultMap id="selectNoDogsizeByGoodsCategoryMapper" type="Goods">
+    <id column="goodsid" property="goodsid"></id>
+    <result column="goodsname" property="goodsname"></result>
+
+    <result column="weight" property="weight"></result>
+    <result column="size" property="size"></result>
+    <result column="disease" property="disease"></result>
+
+    <result column="stock" property="stock"></result>
+    <result column="type" property="type"></result>
+    <result column="nowprice" property="nowprice"></result>
+    <result column="originalprice" property="originalprice"></result>
+    <result column="vipprice" property="vipprice"></result>
+
+    <association property="goodscategory" javaType="GoodsCategory">
+      <result column="categoryname" property="categoryname"></result>
+      <result column="goodscategoryid" property="goodscategoryid"></result>
+    </association>
+    <association property="brand" javaType="Brand">
+      <result column="brandname" property="brandname"></result>
+      <result column="brandid" property="brandid"></result>
+    </association>
+    <association property="dogsize" javaType="Dogsize">
+      <result column="dogsize" property="dogsize"></result>
+      <result column="dogsizeid" property="dogsizeid"></result>
+    </association>
+    <association property="country" javaType="Country">
+      <result column="countryname" property="countryname"></result>
+      <result column="countryid" property="countryid"></result>
+    </association>
+  </resultMap>
+  <select id="selectNoDogsizeByGoodsCategory" resultMap="selectNoDogsizeByGoodsCategoryMapper" parameterType="Integer">
+    select g.*,ca.categoryname,b.brandname,co.countryname
+    from tbl_goods g,tbl_goodscategory ca,tbl_brand b,tbl_country co,tbl_dogsize d
+    where
+    g.goodscategoryid=#{_parameter}
+    and g.brandid=b.brandid
+    and g.countryid=co.countryid
+  </select>
+
+  <!-- List<Goods> selectByCondition(Double price1,Double price2,,,,,);-->
+  <resultMap id="selectByConditionMapper" type="Goods">
+    <id column="goodsid" property="goodsid"></id>
+    <result column="goodsname" property="goodsname"></result>
+
+    <result column="weight" property="weight"></result>
+    <result column="size" property="size"></result>
+    <result column="disease" property="disease"></result>
+
+    <result column="stock" property="stock"></result>
+    <result column="type" property="type"></result>
+    <result column="nowprice" property="nowprice"></result>
+    <result column="originalprice" property="originalprice"></result>
+    <result column="vipprice" property="vipprice"></result>
+
+    <association property="goodscategory" javaType="GoodsCategory">
+      <result column="categoryname" property="categoryname"></result>
+      <result column="goodscategoryid" property="goodscategoryid"></result>
+    </association>
+    <association property="brand" javaType="Brand">
+      <result column="brandname" property="brandname"></result>
+      <result column="brandid" property="brandid"></result>
+
+    </association>
+    <association property="dogsize" javaType="Dogsize">
+      <result column="dogsize" property="dogsize"></result>
+      <result column="dogsizeid" property="dogsizeid"></result>
+    </association>
+    <association property="country" javaType="Country">
+      <result column="countryname" property="countryname"></result>
+      <result column="countryid" property="countryid"></result>
+    </association>
+  </resultMap>
+  <select id="selectByCondition" resultMap="selectByConditionMapper">
+    select g.*,ca.categoryname,b.brandname,d.dogsize,co.countryname
+    from tbl_goods g,tbl_goodscategory ca,tbl_brand b,tbl_country co,tbl_dogsize d
+    <where>
+      g.goodscategoryid=ca.goodscategoryid
+      and g.brandid=b.brandid
+      and g.countryid=co.countryid
+      and g.dogsizeid=d.dogsizeid
+      <if test="minprice != null">
+        and g.nowprice  &gt;  #{param1}
+      </if>
+      <if  test="maxprice !=null">
+        and g.nowprice  &lt;  #{param2}
+      </if>
+      <if  test="countryid !=null">
+        and g.countryid=#{param3}
+      </if>
+      <if  test="type !=null">
+        and g.type=#{param4}
+      </if>
+      <if  test="brandid !=null">
+        and g.brandid=#{param5}
+      </if>
+      <if  test="goodscategoryid !=null">
+        and g.goodscategoryid=#{param6}
+      </if>
+      <if  test="goodsid !=null">
+        and g.goodsid=#{param7}
+      </if>
+    </where>
+  </select>
+
+
+
+
+
+
+
+  <!--  List<Goods> selectNoDogsizeByCondition(Double minprice,Double maxprice);-->
+  <resultMap id="selectNoDogsizeByConditionMapper" type="Goods">
+    <id column="goodsid" property="goodsid"></id>
+    <result column="goodsname" property="goodsname"></result>
+
+    <result column="weight" property="weight"></result>
+    <result column="size" property="size"></result>
+    <result column="disease" property="disease"></result>
+
+    <result column="stock" property="stock"></result>
+    <result column="type" property="type"></result>
+    <result column="nowprice" property="nowprice"></result>
+    <result column="originalprice" property="originalprice"></result>
+    <result column="vipprice" property="vipprice"></result>
+
+    <association property="goodscategory" javaType="GoodsCategory">
+      <result column="categoryname" property="categoryname"></result>
+      <result column="goodscategoryid" property="goodscategoryid"></result>
+    </association>
+    <association property="brand" javaType="Brand">
+      <result column="brandname" property="brandname"></result>
+      <result column="brandid" property="brandid"></result>
+    </association>
+    <association property="dogsize" javaType="Dogsize">
+      <result column="dogsize" property="dogsize"></result>
+      <result column="dogsizeid" property="dogsizeid"></result>
+    </association>
+    <association property="country" javaType="Country">
+      <result column="countryname" property="countryname"></result>
+      <result column="countryid" property="countryid"></result>
+    </association>
+  </resultMap>
+  <select id="selectNoDogsizeByCondition" resultMap="selectNoDogsizeByConditionMapper">
+    select g.*,ca.categoryname,b.brandname,co.countryname
+    from tbl_goods g,tbl_goodscategory ca,tbl_brand b,tbl_country co,tbl_dogsize d
+    <where>
+      g.goodscategoryid=ca.goodscategoryid
+      and g.brandid=b.brandid
+      and g.countryid=co.countryid
+
+      <if  test="maxprice !=null">
+        and g.nowprice  &lt;  #{param2}
+      </if>
+      <if test="minprice != null">
+        and g.nowprice  &gt;  #{param1}
+      </if>
+      <if  test="countryid !=null">
+        and g.countryid=#{param3}
+      </if>
+      <if  test="type !=null">
+        and g.type=#{param4}
+      </if>
+      <if  test="brandid !=null">
+        and g.brandid=#{param5}
+      </if>
+      <if  test="goodscategoryid !=null">
+        and g.goodscategoryid=#{param6}
+      </if>
+      <if  test="goodsid !=null">
+        and g.goodsid=#{param7}
+      </if>
+
+    </where>
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <!-- boolean deleteByGoodsId(Integer goodsid);-->
+  <delete id="deleteByGoodsId" parameterType="Integer" >
+    delete from tbl_goods where goodsid = #{goodsid,}
   </delete>
-  <insert id="insert" parameterType="pluto.entity.Goods" >
-    insert into tbl_goods (goodsid, goodsname, goodstypeid, 
-      brandid, weight, size, 
-      disease, dogsizeid, stock, 
-      type, nowprice, originalprice, 
-      vipprice, countryid)
-    values (#{goodsid,jdbcType=INTEGER}, #{goodsname,jdbcType=VARCHAR}, #{goodstypeid,jdbcType=INTEGER}, 
-      #{brandid,jdbcType=INTEGER}, #{weight,jdbcType=DOUBLE}, #{size,jdbcType=VARCHAR}, 
-      #{disease,jdbcType=VARCHAR}, #{dogsizeid,jdbcType=INTEGER}, #{stock,jdbcType=INTEGER}, 
-      #{type,jdbcType=VARCHAR}, #{nowprice,jdbcType=DOUBLE}, #{originalprice,jdbcType=DOUBLE}, 
-      #{vipprice,jdbcType=DOUBLE}, #{countryid,jdbcType=INTEGER})
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="pluto.entity.Goods" >
-    update tbl_goods
-    set goodsname = #{goodsname,jdbcType=VARCHAR},
-      goodstypeid = #{goodstypeid,jdbcType=INTEGER},
-      brandid = #{brandid,jdbcType=INTEGER},
-      weight = #{weight,jdbcType=DOUBLE},
-      size = #{size,jdbcType=VARCHAR},
-      disease = #{disease,jdbcType=VARCHAR},
-      dogsizeid = #{dogsizeid,jdbcType=INTEGER},
-      stock = #{stock,jdbcType=INTEGER},
-      type = #{type,jdbcType=VARCHAR},
-      nowprice = #{nowprice,jdbcType=DOUBLE},
-      originalprice = #{originalprice,jdbcType=DOUBLE},
-      vipprice = #{vipprice,jdbcType=DOUBLE},
-      countryid = #{countryid,jdbcType=INTEGER}
-    where goodsid = #{goodsid,jdbcType=INTEGER}
+
+  <!--boolean updateByGoodsId(Integer goodsid,Goods goods);-->
+  <update id="updateByGoodsId" parameterType="pluto.entity.Goods">
+    update  tbl_goods set goodsname=#{goodsname},goodscategoryid=#{goodscategory.goodscategoryid},
+    brandid=#{brand.brandid},weight=#{weight},size=#{size},disease=#{disease},stock=#{stock},
+    type=#{type},nowprice=#{nowprice},originalprice=#{originalprice},vipprice=#{vipprice},
+    countryid=#{country.countryid} ,dogsizeid=#{dogsize.dogsizeid}
+    where goodsid=#{goodsid}
   </update>
+
+  <!-- boolean insert(Goods record);-->
+  <insert id="insert" parameterType="Goods">
+    INSERT into tbl_goods
+    (goodsname,goodscategoryid,brandid,weight,size,disease,dogsizeid,stock,
+    type,nowprice,originalprice,vipprice,countryid)
+    VALUES (#{goodsname},#{goodscategory.goodscategoryid},#{brand.brandid},
+    #{weight},#{size},#{disease},#{dogsize.dogsizeid},#{stock},
+    #{type},#{nowprice},#{originalprice},#{vipprice},#{country.countryid})
+  </insert>
+
 </mapper>

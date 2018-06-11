@@ -18,4 +18,7 @@ public interface FosterDetailMapper {
 
     boolean deleteFosterDetailByPetId(Integer petid);
 
+    FosterDetail selectFosterDetailByOrderId(Integer orderid);
+
+    boolean deleteFosterDetailByOrderId(Integer orderid);
 }

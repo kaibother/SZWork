@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+    <script src="../jquery-1.11.2.js"></script>
+</head>
+
+<body>
+
+    <a>333333333333333333333</a>
+    <input name="none" />
+    <form>
+
+        <label>Name:</label>
+        <input name="name" />
+        <a>22222222222222222222</a>
+        <a>22222222222222222222</a>
+        <a>22222222222222222222</a>
+
+        <fieldset>
+            <label>Newsletter:</label>
+            <input name="newsletter" />
+        </fieldset>
+    </form>
+    <a>2ssssssssssssssssssssss</a>
+    <input name="none" />
+    <input name="none" />   <input name="none" />
+    <a>22222222222222222222</a>
+
+	<script>
+        //$('form >input').css('background-color','red');//拿到form下的子元素
+       // $('form input').css('background-color','red');//拿到form下的所有元素。form上面的不包括
+        //$('input + a').css('background-color','red');//拿到所有input下面紧跟着的a标签；
+        $('form ~ a').css('background-color','red');
+    </script>
+
+
+</body>
+</html>

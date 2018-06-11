@@ -4,11 +4,10 @@ import pluto.entity.PayWay;
 
 public interface PayWayMapper {
 
-    int deleteByPrimaryKey(Integer paywayid);
+    boolean deleteByPayWayId(Integer paywayid);
 
-    int insert(PayWay record);
+    boolean insert(PayWay record);
+    PayWay selectByPayWayId(Integer paywayid);
 
-    PayWay selectByPrimaryKey(Integer paywayid);
-
-    int updateByPrimaryKey(PayWay record);
+    boolean updateByPayWayId(PayWay record);
 }

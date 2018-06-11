@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="pluto.dao.BrandMapper" >
-  <resultMap id="BaseResultMap" type="pluto.entity.Brand" >
-    <id column="brandid" property="brandid" jdbcType="INTEGER" />
-    <result column="brandname" property="brandname" jdbcType="VARCHAR" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    brandid, brandname
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
+
+  <!-- Brand selectByBrandId(Integer brandid);-->
+  <select id="selectByBrandId" resultType="Brand" parameterType="java.lang.Integer" >
+    select
+    *
     from tbl_brand
-    where brandid = #{brandid,jdbcType=INTEGER}
+    where brandid = #{brandid}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+  <!--int deleteByBrandId(Integer brandid);-->
+  <delete id="deleteByBrandId" parameterType="java.lang.Integer" >
     delete from tbl_brand
-    where brandid = #{brandid,jdbcType=INTEGER}
+    where brandid = #{brandid}
   </delete>
+
+  <!-- int insert(Brand record);-->
   <insert id="insert" parameterType="pluto.entity.Brand" >
     insert into tbl_brand (brandid, brandname)
-    values (#{brandid,jdbcType=INTEGER}, #{brandname,jdbcType=VARCHAR})
+    values (#{brandid}, #{brandname})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="pluto.entity.Brand" >
+
+  <!-- int updateByBrandId(Brand record);-->
+  <update id="updateByBrandId" parameterType="pluto.entity.Brand" >
     update tbl_brand
-    set brandname = #{brandname,jdbcType=VARCHAR}
-    where brandid = #{brandid,jdbcType=INTEGER}
+    set brandname = #{brandname}
+    where brandid = #{brandid}
   </update>
 </mapper>

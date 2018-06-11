@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="pluto.dao.DefaultAddressMapper" >
+  <resultMap id="BaseResultMap" type="pluto.entity.DefaultAddress" >
+    <id column="defaultaddressid" property="defaultaddressid" jdbcType="INTEGER" />
+
+    <association  property="user" javaType="User">
+      <id column="userid" property="userid"></id>
+      <result column="username" property="username"></result>
+    </association>
+    <association property="country" javaType="Country">
+      <id column="countryid" property="countryid"></id>
+      <result column="countryname" property="countryname"></result>
+    </association>
+    <association property="province" javaType="Province">
+      <id column="provinceid" property="provinceid"></id>
+      <result column="provincename" property="provincename"></result>
+    </association>
+    <association property="city" javaType="City">
+      <id column="cityid" property="cityid"></id>
+      <result column="cityname" property="cityname"></result>
+    </association>
+    <association property="district" javaType="District">
+      <id column="districtid" property="districtid"></id>
+      <result column="districtname" property="districtname"></result>
+    </association>
+    <association property="street" javaType="Street">
+      <id column="streetid" property="streetid"></id>
+      <result column="streetname" property="streetname"></result>
+    </association>
+  </resultMap>
+
+
+  <!--//*查询用户默认收货的值的cityid*/
+    public int selectUserCityId(@Param("userid") Integer userid);-->
+  <select id="selectUserCityId" resultType="int" parameterType="Integer">
+    select cityid from tbl_defaultaddress where tbl_defaultaddress.userid=#{userid}
+  </select>
+
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+  </delete>
+  <insert id="insert" parameterType="pluto.entity.Address" >
+
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="pluto.entity.Address" >
+
+  </update>
+</mapper>

@@ -3,42 +3,59 @@
 <mapper namespace="pluto.dao.AddressMapper" >
   <resultMap id="BaseResultMap" type="pluto.entity.Address" >
     <id column="addressid" property="addressid" jdbcType="INTEGER" />
-    <result column="countryid" property="countryid" jdbcType="INTEGER" />
-    <result column="provinceid" property="provinceid" jdbcType="INTEGER" />
-    <result column="cityid" property="cityid" jdbcType="INTEGER" />
-    <result column="districtid" property="districtid" jdbcType="INTEGER" />
-    <result column="streetid" property="streetid" jdbcType="INTEGER" />
-    <result column="userid" property="userid" jdbcType="INTEGER" />
+
+    <association  property="user" javaType="User">
+      <id column="userid" property="userid"></id>
+      <result column="username" property="username"></result>
+    </association>
+    <association property="country" javaType="Country">
+      <id column="countryid" property="countryid"></id>
+      <result column="countryname" property="countryname"></result>
+    </association>
+    <association property="province" javaType="Province">
+      <id column="provinceid" property="provinceid"></id>
+      <result column="provincename" property="provincename"></result>
+    </association>
+    <association property="city" javaType="City">
+      <id column="cityid" property="cityid"></id>
+      <result column="cityname" property="cityname"></result>
+    </association>
+    <association property="district" javaType="District">
+      <id column="districtid" property="districtid"></id>
+      <result column="districtname" property="districtname"></result>
+    </association>
+    <association property="street" javaType="Street">
+      <id column="streetid" property="streetid"></id>
+      <result column="streetname" property="streetname"></result>
+    </association>
   </resultMap>
-  <sql id="Base_Column_List" >
-    addressid, countryid, provinceid, cityid, districtid, streetid, userid
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tbl_address
-    where addressid = #{addressid,jdbcType=INTEGER}
+
+  <!-- /*根据用户id来查询用户地址*/
+    public List<Address> selectUserAddress(Integer userid);-->
+  <select id="selectUserAddress" parameterType="Integer" resultMap="BaseResultMap">
+    select tbl_country.countryname,tbl_province.provincename,tbl_city.cityname,tbl_district.districtname,tbl_street.streetname
+    from  tbl_country,tbl_province,tbl_city,tbl_district,tbl_street,tbl_address
+    where tbl_address.userid=#{userid}
+    and tbl_address.countryid=tbl_country.countryid
+    and tbl_address.provinceid=tbl_province.provinceid
+    and tbl_address.cityid=tbl_city.cityid
+    and tbl_address.districtid=tbl_district.districtid
+    and tbl_address.streetid=tbl_street.streetid
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from tbl_address
-    where addressid = #{addressid,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="pluto.entity.Address" >
-    insert into tbl_address (addressid, countryid, provinceid, 
-      cityid, districtid, streetid, 
-      userid)
-    values (#{addressid,jdbcType=INTEGER}, #{countryid,jdbcType=INTEGER}, #{provinceid,jdbcType=INTEGER}, 
-      #{cityid,jdbcType=INTEGER}, #{districtid,jdbcType=INTEGER}, #{streetid,jdbcType=INTEGER}, 
-      #{userid,jdbcType=INTEGER})
+
+  <!--/*查询用户的cityid*/
+    public int selectUserCityId(@Param("userid") Integer userid);-->
+  <select id="selectUserCityId" resultType="int" parameterType="Integer">
+    select cityid from tbl_address where tbl_address.userid=#{userid}
+  </select>
+
+  <!-- /*用户插入地址*/
+     public boolean insertUserAddress(Address address);-->
+  <insert id="insertUserAddress" parameterType="Address" useGeneratedKeys="true" keyProperty="addressid">
+    insert into tbl_address(countryid,provinceid,cityid,districtid,streetid,userid)
+    values(#{address.country.countryid},#{address.province.provinceid},
+    #{address.city.cityid},#{address.district.districtid},
+    #{address.street.streetid},#{address.user.userid})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="pluto.entity.Address" >
-    update tbl_address
-    set countryid = #{countryid,jdbcType=INTEGER},
-      provinceid = #{provinceid,jdbcType=INTEGER},
-      cityid = #{cityid,jdbcType=INTEGER},
-      districtid = #{districtid,jdbcType=INTEGER},
-      streetid = #{streetid,jdbcType=INTEGER},
-      userid = #{userid,jdbcType=INTEGER}
-    where addressid = #{addressid,jdbcType=INTEGER}
-  </update>
+
 </mapper>

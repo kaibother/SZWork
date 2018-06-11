@@ -1,0 +1,26 @@
+@charset "utf-8";
+.footer{
+		width:1350px;
+		background-color:#CCC;
+		height:100px;
+		}
+	.footer .logo img{
+		width:100px;
+		height:100px;
+		padding-left:200px;
+		padding-top:50px;
+		}
+	.footer ul{
+		margin-left:280px;
+		margin-top:-80px;
+		}
+	.footer ul li{
+		list-style:none;
+		float:left;
+		margin-left:30px;
+		line-height:30px;
+		}
+	.footer ul li a{
+		color:#000;
+		}/* CSS Document */
+

@@ -4,11 +4,11 @@ import pluto.entity.GoodsCategory;
 
 public interface GoodsCategoryMapper {
 
-    int deleteByPrimaryKey(Integer goodscategoryid);
+    boolean deleteByGoodsCategoryId(Integer goodscategoryid);
 
-    int insert(GoodsCategory record);
+    boolean insert(GoodsCategory record);
 
-    GoodsCategory selectByPrimaryKey(Integer goodscategoryid);
+    GoodsCategory selectByGoodsCategoryId(Integer goodscategoryid);
 
-    int updateByPrimaryKey(GoodsCategory record);
+    boolean updateByGoodsCategoryId(GoodsCategory record);
 }

@@ -1,0 +1,24 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+    <script src="../jquery-1.11.2.js"></script>
+</head>
+
+<body>
+    <input name="apple" />
+    <input name="flower" checked="checked" />
+	<script>
+        $(document).ready(function(){
+            $("input:not(:checked)").css("background-color","red");
+        });
+
+
+
+    </script>
+
+
+
+</body>
+</html>

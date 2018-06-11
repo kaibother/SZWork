@@ -9,7 +9,7 @@
     townid, townname
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from tbl_town
     where townid = #{townid,jdbcType=INTEGER}

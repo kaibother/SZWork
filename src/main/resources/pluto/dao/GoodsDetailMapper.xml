@@ -1,38 +1,206 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="pluto.dao.GoodsDetailMapper" >
-  <resultMap id="BaseResultMap" type="pluto.entity.GoodsDetail" >
-    <id column="goodsdetailid" property="goodsdetailid" jdbcType="INTEGER" />
-    <result column="buycount" property="buycount" jdbcType="INTEGER" />
-    <result column="onegoodscountprice" property="onegoodscountprice" jdbcType="DOUBLE" />
-    <result column="orderid" property="orderid" jdbcType="INTEGER" />
-    <result column="goodsid" property="goodsid" jdbcType="INTEGER" />
+
+  <resultMap id="selectGoodsDetailByGoodsDetailIdMapper" type="pluto.entity.GoodsDetail" >
+    <id column="goodsdetailid" property="goodsdetailid"  />
+    <result column="buycount" property="buycount"  />
+    <result column="onegoodscountprice" property="onegoodscountprice" />
+    <association  property="order" javaType="Order">
+      <result column="orderid" property="orderid"></result>
+      <result column="orderdate" property="orderdate"></result>
+      <result column="totalprice" property="totalprice"></result>
+      <result column="orderstatus" property="orderstatus"></result>
+      <association property="payway" javaType="PayWay">
+        <result column="paywayid" property="paywayid"></result>
+        <result column="paywayname" property="paywayname"></result>
+      </association>
+      <association property="user" javaType="User">
+        <result column="userid" property="userid"></result>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="tel" property="tel"></result>
+        <result column="userbalance" property="userbalance"></result>
+        <result column="vip" property="vip"></result>
+      </association>
+      <association property="userconsumption" javaType="UserConsumption">
+        <result column="userconsumptionid" property="userconsumptionid"></result>
+        <result column="consumptionamount" property="consumptionamount"></result>
+        <result column="rechargeamount" property="rechargeamount"></result>
+      </association>
+    </association>
+
+
+
+    <association property="goods" javaType="Goods">
+      <id column="goodsid" property="goodsid"></id>
+      <result column="goodsname" property="goodsname"></result>
+      <result column="weight" property="weight"></result>
+      <result column="size" property="size"></result>
+      <result column="disease" property="disease"></result>
+      <result column="stock" property="stock"></result>
+      <result column="type" property="type"></result>
+      <result column="nowprice" property="nowprice"></result>
+      <result column="originalprice" property="originalprice"></result>
+      <result column="vipprice" property="vipprice"></result>
+      <association property="goodscategory" javaType="GoodsCategory">
+        <result column="categoryname" property="categoryname"></result>
+        <result column="goodscategoryid" property="goodscategoryid"></result>
+      </association>
+      <association property="brand" javaType="Brand">
+        <result column="brandname" property="brandname"></result>
+        <result column="brandid" property="brandid"></result>
+      </association>
+      <association property="dogsize" javaType="Dogsize">
+        <result column="dogsize" property="dogsize"></result>
+        <result column="dogsizeid" property="dogsizeid"></result>
+      </association>
+      <association property="country" javaType="Country">
+        <result column="countryname" property="countryname"></result>
+        <result column="countryid" property="countryid"></result>
+      </association>
+    </association>
   </resultMap>
-  <sql id="Base_Column_List" >
-    goodsdetailid, buycount, onegoodscountprice, orderid, goodsid
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from tbl_goodsdetail
-    where goodsdetailid = #{goodsdetailid,jdbcType=INTEGER}
+  <!-- GoodsDetail selectGoodsDetailByGoodsDetailId(Integer goodsdetailid);-->
+  <select id="selectGoodsDetailByGoodsDetailId" resultMap="selectGoodsDetailByGoodsDetailIdMapper" parameterType="java.lang.Integer" >
+    select gd.*,o.*,g.*,co.*,b.*,ca.*,u.*,us.*,p.*,d.*
+    from tbl_goodsdetail gd,tbl_order o,tbl_goods g,
+    tbl_goodscategory ca,tbl_brand b,tbl_country co,tbl_user u,
+    tbl_userconsumption us,tbl_payway p,tbl_dogsize d
+    where goodsdetailid =#{_parameter}
+    and gd.orderid=o.orderid
+    and gd.goodsid=g.goodsid
+    and co.countryid=g.countryid
+    and g.brandid=b.brandid
+    and g.goodscategoryid=ca.goodscategoryid
+    and u.userid=o.userid
+    and us.userconsumptionid=o.userconsumptionid
+    and p.paywayid=o.paywayid
+    and d.dogsizeid=g.dogsizeid
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <resultMap id="selectGoodsDetailNoDogsizeByGoodsDetailIdMapper" type="pluto.entity.GoodsDetail" >
+    <id column="goodsdetailid" property="goodsdetailid"  />
+    <result column="buycount" property="buycount"  />
+    <result column="onegoodscountprice" property="onegoodscountprice" />
+    <association  property="order" javaType="Order">
+      <result column="orderid" property="orderid"></result>
+      <result column="orderdate" property="orderdate"></result>
+      <result column="totalprice" property="totalprice"></result>
+      <result column="orderstatus" property="orderstatus"></result>
+      <association property="payway" javaType="PayWay">
+        <result column="paywayid" property="paywayid"></result>
+        <result column="paywayname" property="paywayname"></result>
+      </association>
+      <association property="user" javaType="User">
+        <result column="userid" property="userid"></result>
+        <result column="username" property="username"></result>
+        <result column="password" property="password"></result>
+        <result column="tel" property="tel"></result>
+        <result column="userbalance" property="userbalance"></result>
+        <result column="vip" property="vip"></result>
+      </association>
+      <association property="userconsumption" javaType="UserConsumption">
+        <result column="userconsumptionid" property="userconsumptionid"></result>
+        <result column="consumptionamount" property="consumptionamount"></result>
+        <result column="rechargeamount" property="rechargeamount"></result>
+      </association>
+    </association>
+    <association property="goods" javaType="Goods">
+      <id column="goodsid" property="goodsid"/>
+      <result column="goodsname" property="goodsname"/>
+      <result column="weight" property="weight"/>
+      <result column="size" property="size"/>
+      <result column="disease" property="disease"/>
+      <result column="stock" property="stock"/>
+      <result column="type" property="type"/>
+      <result column="nowprice" property="nowprice"/>
+      <result column="originalprice" property="originalprice"/>
+      <result column="vipprice" property="vipprice"/>
+      <association property="goodscategory" javaType="GoodsCategory">
+        <id column="goodscategoryid" property="goodscategoryid"/>
+        <result column="categoryname" property="categoryname"/>
+      </association>
+      <association property="brand" javaType="Brand">
+        <id column="brandid" property="brandid"/>
+        <result column="brandname" property="brandname"/>
+      </association>
+      <association property="dogsize" javaType="Dogsize">
+        <id column="dogsizeid" property="dogsizeid"/>
+        <result column="dogsize" property="dogsize"/>
+      </association>
+      <association property="country" javaType="Country">
+        <id column="countryid" property="countryid"/>
+        <result column="countryname" property="countryname"/>
+      </association>
+    </association>
+  </resultMap>
+  <!-- GoodsDetail selectGoodsDetailNoDogsizeByGoodsDetailId(Integer goodsdetailid);-->
+  <select id="selectGoodsDetailNoDogsizeByGoodsDetailId"
+          resultMap="selectGoodsDetailNoDogsizeByGoodsDetailIdMapper" parameterType="java.lang.Integer" >
+    select gd.*,o.*,g.*,co.*,b.*,ca.*,u.*,us.*,p.*
+    from tbl_goodsdetail gd,tbl_order o,tbl_goods g,
+    tbl_goodscategory ca,tbl_brand b,tbl_country co,tbl_user u,
+    tbl_userconsumption us,tbl_payway p
+    where goodsdetailid =#{_parameter}
+    and gd.orderid=o.orderid
+    and gd.goodsid=g.goodsid
+    and co.countryid=g.countryid
+    and g.brandid=b.brandid
+    and g.goodscategoryid=ca.goodscategoryid
+    and u.userid=o.userid
+    and us.userconsumptionid=o.userconsumptionid
+    and p.paywayid=o.paywayid
+
+  </select>
+
+
+
+
+
+
+
+
+
+
+
+
+  <!--int deleteByGoodsDetailId(Integer goodsdetailid);-->
+  <delete id="deleteByGoodsDetailId" parameterType="java.lang.Integer" >
     delete from tbl_goodsdetail
-    where goodsdetailid = #{goodsdetailid,jdbcType=INTEGER}
+    where goodsdetailid = #{goodsdetailid}
   </delete>
+
+
+
+
+  <!-- int insert(GoodsDetail record);-->
   <insert id="insert" parameterType="pluto.entity.GoodsDetail" >
-    insert into tbl_goodsdetail (goodsdetailid, buycount, onegoodscountprice, 
-      orderid, goodsid)
-    values (#{goodsdetailid,jdbcType=INTEGER}, #{buycount,jdbcType=INTEGER}, #{onegoodscountprice,jdbcType=DOUBLE}, 
-      #{orderid,jdbcType=INTEGER}, #{goodsid,jdbcType=INTEGER})
+    insert into tbl_goodsdetail (goodsdetailid, buycount, onegoodscountprice,
+    orderid, goodsid)
+    values (#{goodsdetailid}, #{buycount}, #{onegoodscountprice},
+    #{order.orderid}, #{goods.goodsid})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="pluto.entity.GoodsDetail" >
+
+  <!--int update(GoodsDetail record);-->
+  <update id="update" parameterType="pluto.entity.GoodsDetail" >
     update tbl_goodsdetail
-    set buycount = #{buycount,jdbcType=INTEGER},
-      onegoodscountprice = #{onegoodscountprice,jdbcType=DOUBLE},
-      orderid = #{orderid,jdbcType=INTEGER},
-      goodsid = #{goodsid,jdbcType=INTEGER}
-    where goodsdetailid = #{goodsdetailid,jdbcType=INTEGER}
+    set buycount = #{buycount},
+      onegoodscountprice = #{onegoodscountprice},
+      orderid = #{order.orderid},
+      goodsid = #{goods.goodsid}
+    where goodsdetailid = #{goodsdetailid}
   </update>
 </mapper>

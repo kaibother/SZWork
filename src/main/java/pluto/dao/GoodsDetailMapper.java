@@ -3,12 +3,10 @@ package pluto.dao;
 import pluto.entity.GoodsDetail;
 
 public interface GoodsDetailMapper {
+    GoodsDetail selectGoodsDetailByGoodsDetailId(Integer goodsdetailid);
+    GoodsDetail selectGoodsDetailNoDogsizeByGoodsDetailId(Integer goodsdetailid);
 
-    int deleteByPrimaryKey(Integer goodsdetailid);
-
-    int insert(GoodsDetail record);
-
-    GoodsDetail selectByPrimaryKey(Integer goodsdetailid);
-
-    int updateByPrimaryKey(GoodsDetail record);
+    boolean deleteByGoodsDetailId(Integer goodsdetailid);
+    boolean insert(GoodsDetail record);
+    boolean update(GoodsDetail record);
 }
