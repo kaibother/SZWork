@@ -7,14 +7,6 @@ import java.util.List;
 
 public interface HospitalInfoMapper {
 
-    boolean deleteByPrimaryKey(Integer hospitalid);
-
-    boolean insert(HospitalInfo record);
-
-    HospitalInfo selectByPrimaryKey(Integer hospitalid);
-
-    boolean updateByPrimaryKey(HospitalInfo record);
-
     /*根据用户的cityid来查询医院*/
     public List<HospitalInfo> selectHospitalInfoByUserCityId(@Param("cityid") Integer cityid);
 

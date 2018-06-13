@@ -41,12 +41,4 @@
     where tbl_user.userid=#{user.userid}
   </update>
 
-
-  <update id="updateByPrimaryKey" parameterType="pluto.entity.User" >
-
-  </update>
-
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-
-  </delete>
 </mapper>

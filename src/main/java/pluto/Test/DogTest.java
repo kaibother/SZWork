@@ -1,3 +1,4 @@
+/*
 package pluto.Test;
 
 import com.sun.org.apache.xpath.internal.SourceTree;
@@ -98,9 +99,11 @@ public class DogTest {
         for (Pet pet:pets){
             System.out.println(pet.getDogname());
         }
-        /*
+        */
+/*
 
-        boolean deleteDogDiseaseById(Integer dogdiseaseid);*/
+        boolean deleteDogDiseaseById(Integer dogdiseaseid);*//*
+
         System.out.println("修改详情");
         System.out.println(dogDiseaseMapper.updateDogDisease(dogDisease));
         System.out.println("插入详情");
@@ -121,3 +124,4 @@ public class DogTest {
 
 
 }
+*/

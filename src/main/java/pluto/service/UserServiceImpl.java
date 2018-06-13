@@ -1,46 +1,54 @@
 package pluto.service;
-
-import pluto.entity.Address;
-import pluto.entity.Order;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import pluto.dao.UserConsumptionMapper;
+import pluto.dao.UserMapper;
 import pluto.entity.User;
 import pluto.entity.UserConsumption;
 
 import java.util.List;
 
+@Service
 public class UserServiceImpl implements UserService {
-    public Double QueryBalance(int userid) {
-        return null;
+
+    @Autowired
+    private UserMapper userMapper;
+
+    @Autowired
+    private UserConsumptionMapper userConsumptionMapper;
+
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)
+    public boolean addUserConsumption(UserConsumption record) {
+        return userConsumptionMapper.insertUserConsumption(record);
     }
 
-    public List<UserConsumption> QueryConsumption(int userid) {
-        return null;
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)
+    public boolean modifyUserConsumption(UserConsumption userConsumption) {
+        return userConsumptionMapper.updateUserConsumption(userConsumption);
     }
 
-    public boolean BalanceRecharge(int userid, Double rechargeamount) {
-        return false;
+    public List<UserConsumption> queryAllUserConsumption(Integer userid) {
+        return userConsumptionMapper.selectAllUserConsumption(userid);
     }
 
-    public List<Order> QueryOrder(int userid) {
-        return null;
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)
+    public boolean addUser(User user) {
+        return userMapper.insertUser(user);
     }
 
-    public boolean RemoveDeliveryAddress(int userid) {
-        return false;
+    public User queryByUserId(Integer userid) {
+        return userMapper.selectByUserId(userid);
     }
 
-    public boolean ModifyDeliverAddress(Address address) {
-        return false;
+    public String checkUserVip(Integer userid) {
+        return userMapper.checkUserVip(userid);
     }
 
-    public boolean AddDeliverAddress(Address address) {
-        return false;
-    }
-
-    public User QueryUserInfo(int userid) {
-        return null;
-    }
-
-    public boolean ModifyUserInfo(User user) {
-        return false;
+    @Transactional(propagation = Propagation.REQUIRED,isolation = Isolation.DEFAULT)
+    public boolean modifyUserinfo(User user) {
+        return userMapper.updateUserinfo(user);
     }
 }

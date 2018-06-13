@@ -18,13 +18,21 @@
   <select id="selectAllUserConsumption" parameterType="Integer" resultMap="BaseResultMap">
     select * from tbl_userconsumption,tbl_user where tbl_userconsumption.userid=#{param}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
 
-  </delete>
-  <insert id="insert" parameterType="pluto.entity.UserConsumption" >
 
+
+ <!-- boolean insertUserConsumption(UserConsumption record);-->
+
+  <insert id="insertUserConsumption" parameterType="UserConsumption" useGeneratedKeys="true" keyProperty="userconsumptionid">
+    insert into tbl_userconsumption(consumptionamount,userid,rechargeamount)
+    VALUES (#{consumptionamount},#{user.userid},#{rechargeamount})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="pluto.entity.UserConsumption" >
 
+  <!--//更新消费记录
+  boolean updateUserConsumption(UserConsumption userConsumption);-->
+  <update id="updateUserConsumption" parameterType="UserConsumption" >
+      UPDATE tbl_userconsumption
+      SET  consumptionamount=#{consumptionamount},rechargeamount=#{rechargeamount}
+      WHERE  userconsumptionid=#{userconsumptionid} and userid=#{user.userid}
   </update>
 </mapper>

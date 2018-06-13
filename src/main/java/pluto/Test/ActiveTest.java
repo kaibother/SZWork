@@ -1,3 +1,4 @@
+/*
 package pluto.Test;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.junit.Test;
@@ -69,7 +70,9 @@ public class ActiveTest {
 
 
 
-       /* System.out.println("按日期查询："+activeSignUpMapper.selectSignUpByActivedate(new Date("2018-05-09")));*/
+       */
+/* System.out.println("按日期查询："+activeSignUpMapper.selectSignUpByActivedate(new Date("2018-05-09")));*//*
+
     }
     @Test
     public void testinsert() throws ParseException {
@@ -98,3 +101,4 @@ public class ActiveTest {
         System.out.println("活动类别有："+activeTypeMapper.selectActiveTypeName());
     }
 }
+*/

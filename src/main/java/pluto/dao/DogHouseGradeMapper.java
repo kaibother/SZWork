@@ -7,6 +7,6 @@ import java.util.List;
 public interface DogHouseGradeMapper {
 
     List<DogHouseGrade> selectAllDogHouseGrade();
-    DogHouseGrade selectDogHouseGradeByName(String doghousegrade);
+    DogHouseGrade selectDogHouseGradeById(Integer doghousegradeid);
 
 }

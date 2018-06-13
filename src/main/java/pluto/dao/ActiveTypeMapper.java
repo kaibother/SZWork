@@ -5,5 +5,8 @@ import pluto.entity.ActiveType;
 import java.util.List;
 
 public interface ActiveTypeMapper {
-    List<String>selectActiveTypeName();
+
+    List<ActiveType>selectAllActivityType();
+
+    ActiveType selectActiveTypeByName(String activename);
 }

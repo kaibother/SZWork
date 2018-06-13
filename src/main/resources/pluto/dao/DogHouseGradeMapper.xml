@@ -7,10 +7,10 @@
     SELECT  * FROM  tbl_doghousegrade
   </select>
 
- <!-- DogHouseGrade selectDogHouseGradeByName(String doghousegrade);-->
-  <select id="selectDogHouseGradeByName" resultType="DogHouseGrade" parameterType="String">
+ <!--  DogHouseGrade selectDogHouseGradeById(Integer doghousegradeid);-->
+  <select id="selectDogHouseGradeById" resultType="DogHouseGrade" parameterType="Integer">
     SELECT * FROM  tbl_doghousegrade
-    WHERE doghousegrade=#{_parameter}
+    WHERE doghousegradeid=#{_parameter}
   </select>
 
 </mapper>

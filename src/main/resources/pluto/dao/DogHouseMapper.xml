@@ -5,6 +5,10 @@
   <resultMap id="selectHouseMap" type="DogHouse">
     <id column="doghouseid" property="doghouseid"/>
     <result column="doghousename" property="doghousename"/>
+    <result column="doghousepic" property="doghousepic"/>
+    <result column="doghousebig" property="doghousebig"/>
+    <result column="doghouseimg" property="doghouseimg"/>
+    <result column="doghousetiny" property="doghousetiny"/>
     <association javaType="DogHouseGrade" property="dogHouseGrade">
         <id column="doghousegradeid" property="doghousegradeid"/>
         <result column="doghousegrade" property="doghousegrade"/>
@@ -41,5 +45,12 @@
     select * from tbl_doghouse house,tbl_doghousegrade grade,tbl_dogsize size
     where house.doghousegradeid=grade.doghousegradeid and house.dogsizeid=size.dogsizeid
     and house.doghousegradeid=#{param1} and house.dogsizeid=#{param2}
+  </select>
+
+  <!--DogHouse selectHouseById(Integer doghouseid);-->
+  <select id="selectHouseById" resultMap="selectHouseMap" parameterType="Integer">
+    select * from tbl_doghouse house,tbl_doghousegrade grade,tbl_dogsize size
+    where house.doghousegradeid=grade.doghousegradeid and house.dogsizeid=size.dogsizeid
+    and house.doghouseid=#{_parameter}
   </select>
 </mapper>

@@ -37,17 +37,4 @@
     select cityid from tbl_defaultaddress where tbl_defaultaddress.userid=#{userid}
   </select>
 
-
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-
-  </delete>
-  <insert id="insert" parameterType="pluto.entity.Address" >
-
-  </insert>
-  <update id="updateByPrimaryKey" parameterType="pluto.entity.Address" >
-
-  </update>
 </mapper>

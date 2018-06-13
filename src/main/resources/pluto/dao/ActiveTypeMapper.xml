@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="pluto.dao.ActiveTypeMapper" >
- <!-- List<ActiveType>selectActiveTypeName();-->
-  <select id="selectActiveTypeName" resultType="String">
-    SELECT  activename from tbl_activetype
+    <!--List<ActiveType>selectAllActivityType();-->
+    <select id="selectAllActivityType" resultType="ActiveType">
+        SELECT * from tbl_activetype
+    </select>
+    <!--ActiveType selectActiveTypeByName(String activename);-->
+
+  <select id="selectActiveTypeByName" resultType="ActiveType" parameterType="String">
+    SELECT  * from tbl_activetype
+    where activename=#{_parameter}
   </select>
 </mapper>

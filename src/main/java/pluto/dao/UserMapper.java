@@ -7,13 +7,6 @@ import pluto.entity.User;
 import java.util.List;
 
 public interface UserMapper {
-
-    boolean deleteByPrimaryKey(Integer userid);
-
-    boolean updateByPrimaryKeyWithBLOBs(User record);
-
-    boolean updateByPrimaryKey(User record);
-
     /*用户插入信息*/
     public boolean insertUser(User user);
     /*根据用户id查询用户*/

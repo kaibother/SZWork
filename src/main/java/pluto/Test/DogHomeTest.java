@@ -1,3 +1,4 @@
+/*
 package pluto.Test;
 
 import org.junit.Test;
@@ -38,18 +39,25 @@ public class DogHomeTest {
     @Test
     public void fosterDetail() {
         System.out.println(fosterDetailMapper.deleteFosterDetailByPetId(1));
-      /* FosterDetail fosterDetail=fosterDetailMapper.selectFosterDetailById(1);
+      */
+/* FosterDetail fosterDetail=fosterDetailMapper.selectFosterDetailById(1);
        fosterDetail.setFosterday(3);
-        System.out.println(fosterDetailMapper.updateFosterDetail(fosterDetail));*/
-       /*
+        System.out.println(fosterDetailMapper.updateFosterDetail(fosterDetail));*//*
+
+       */
+/*
         System.out.println(fosterDetail.getPet().getUser().getUsername());
         System.out.println(fosterDetail.getFosterdetailid()+"  "+fosterDetail.getFosterday()+"  "+fosterDetail.getFostertotalprice()+"  "+fosterDetail.getDoghousegrade().getDoghousegrade()+"  "+fosterDetail.getPet().getDogname());
         fosterDetail.setFosterdetailid(3);
-        System.out.println(fosterDetailMapper.insertFosterDetail(fosterDetail));*/
-       /* List<FosterDetail> fosterDetails = fosterDetailMapper.selectFosterDetailByPetId(2);
+        System.out.println(fosterDetailMapper.insertFosterDetail(fosterDetail));*//*
+
+       */
+/* List<FosterDetail> fosterDetails = fosterDetailMapper.selectFosterDetailByPetId(2);
         for (FosterDetail fosterDetail: fosterDetails) {
             System.out.println(fosterDetail.getFosterdetailid() + "  " + fosterDetail.getFosterday() + "  " + fosterDetail.getFostertotalprice() + "  " + fosterDetail.getDoghousegrade().getDoghousegrade() + "  " + fosterDetail.getPet().getDogname());
-        }*/
+        }*//*
+
 
     }
 }
+*/
